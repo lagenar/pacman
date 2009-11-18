@@ -1,0 +1,1580 @@
+# depslib dependency file v1.0
+1257781392 source:/home/mmatos/Escritorio/pacman/src/PacmanRTAPathfinder.cpp
+	"PacmanRTAPathfinder.h"
+	"Pacman.h"
+	"PacmanActions.h"
+	"climits"
+	"ctime"
+	"fstream"
+	"sstream"
+
+1257742236 /home/mmatos/Escritorio/pacman/src/PacmanRTAPathfinder.h
+	"PacmanSearch.h"
+	"GameSimulator.h"
+	"list"
+
+1257742540 /home/mmatos/Escritorio/pacman/include/pacman/PacmanSearch.h
+	"Action.h"
+	"Game.h"
+
+1257227304 /home/mmatos/Escritorio/pacman/include/gliese/Action.h
+	"Observer.h"
+	"string"
+
+1254183946 /home/mmatos/Escritorio/pacman/include/gliese/Observer.h
+	"Observable.h"
+	"list"
+
+1254183946 /home/mmatos/Escritorio/pacman/include/gliese/Observable.h
+	"list"
+	"string"
+
+1067763541 /home/mmatos/Escritorio/pacman/include/stlport/list
+	<stl/_prolog.h>
+	<stl/_list.h>
+	<stl/_epilog.h>
+
+1067763543 /home/mmatos/Escritorio/pacman/include/stlport/stl/_prolog.h
+	<stl/_config.h>
+	<config/_prolog.h>
+
+1257988799 /home/mmatos/Escritorio/pacman/include/stlport/stl/_config.h
+	<stl_user_config.h>
+	<stl/_config_compat.h>
+	<stl/_site_config.h>
+	<config/stlcomp.h>
+	<config/stl_confix.h>
+	<features.h>
+	<afx.h>
+	<windows.h>
+	<isynonym.hpp>
+	<yvals.h>
+	<stl/_abbrevs.h>
+
+1067763542 /home/mmatos/Escritorio/pacman/include/stlport/stl_user_config.h
+
+1067763548 /home/mmatos/Escritorio/pacman/include/stlport/stl/_config_compat.h
+
+1067763543 /home/mmatos/Escritorio/pacman/include/stlport/stl/_site_config.h
+
+1067763552 /home/mmatos/Escritorio/pacman/include/stlport/config/stlcomp.h
+	<config/stl_ibm.h>
+	<config/stl_icc.h>
+	<config/stl_gcc.h>
+	<config/stl_kai.h>
+	<config/stl_sgi.h>
+	<config/stl_as400.h>
+	<config/stl_msvc.h>
+	<config/stl_bc.h>
+	<config/stl_sunpro.h>
+	<config/stl_watcom.h>
+	<config/stl_como.h>
+	<config/stl_dm.h>
+	<config/stl_symantec.h>
+	<config/stl_apple.h>
+	<config/stl_mwerks.h>
+	<config/stl_hpacc.h>
+	<config/stl_intel.h>
+	<config/stl_sco.h>
+	<config/stl_apcc.h>
+	<config/stl_dec_vms.h>
+	<config/stl_dec.h>
+	<config/stl_is.h>
+	<config/stl_fujitsu.h>
+	<config/stl_cray.h>
+	<config/stl_mycomp.h>
+
+1067763551 /home/mmatos/Escritorio/pacman/include/stlport/config/stl_ibm.h
+
+1067763551 /home/mmatos/Escritorio/pacman/include/stlport/config/stl_icc.h
+
+1257988799 /home/mmatos/Escritorio/pacman/include/stlport/config/stl_gcc.h
+	<config/stl_sco.h>
+	<config/stl_solaris.h>
+
+1067763551 /home/mmatos/Escritorio/pacman/include/stlport/config/stl_sco.h
+
+1075939776 /home/mmatos/Escritorio/pacman/include/stlport/config/stl_solaris.h
+	<sys/feature_tests.h>
+
+1257988799 /home/mmatos/Escritorio/pacman/include/stlport/config/stl_kai.h
+	<config/stl_solaris.h>
+	<standards.h>
+
+1067763551 /home/mmatos/Escritorio/pacman/include/stlport/config/stl_sgi.h
+	<standards.h>
+
+1067763551 /home/mmatos/Escritorio/pacman/include/stlport/config/stl_as400.h
+
+1078954506 /home/mmatos/Escritorio/pacman/include/stlport/config/stl_msvc.h
+	<config/stl_wince.h>
+	<config/vc_select_lib.h>
+
+1067763552 /home/mmatos/Escritorio/pacman/include/stlport/config/stl_wince.h
+	<windows.h>
+	<windows.h>
+
+1067763552 /home/mmatos/Escritorio/pacman/include/stlport/config/vc_select_lib.h
+	<config/stl_select_lib.h>
+
+1067763552 /home/mmatos/Escritorio/pacman/include/stlport/config/stl_select_lib.h
+
+1067763552 /home/mmatos/Escritorio/pacman/include/stlport/config/stl_bc.h
+
+1067763552 /home/mmatos/Escritorio/pacman/include/stlport/config/stl_sunpro.h
+	<config/stl_solaris.h>
+
+1067763551 /home/mmatos/Escritorio/pacman/include/stlport/config/stl_watcom.h
+
+1257988799 /home/mmatos/Escritorio/pacman/include/stlport/config/stl_como.h
+	<math.h>
+	<math.h>
+	<sys/cdefs.h>
+	<sys/cdefs.h>
+	<stddef.h>
+	<math.h>
+	<stdexcept.stdh>
+
+1067763542 /home/mmatos/Escritorio/pacman/include/stlport/math.h
+	<stl/_prolog.h>
+	<stl/_epilog.h>
+
+1067763543 /home/mmatos/Escritorio/pacman/include/stlport/stl/_epilog.h
+	<config/_epilog.h>
+	<stl/_config_compat_post.h>
+	<stl/_config.h>
+
+1067763552 /home/mmatos/Escritorio/pacman/include/stlport/config/_epilog.h
+
+1067763547 /home/mmatos/Escritorio/pacman/include/stlport/stl/_config_compat_post.h
+
+1067763542 /home/mmatos/Escritorio/pacman/include/stlport/stddef.h
+	<stl/_prolog.h>
+	<stl/_epilog.h>
+
+1067763552 /home/mmatos/Escritorio/pacman/include/stlport/config/stl_dm.h
+
+1067763552 /home/mmatos/Escritorio/pacman/include/stlport/config/stl_symantec.h
+
+1067763552 /home/mmatos/Escritorio/pacman/include/stlport/config/stl_apple.h
+	<CoreSwitches_AC.h>
+	<ConditionalMacros_AC.h>
+	<Types_AC.h>
+	<ConditionalMacros.h>
+	<Types.h>
+	<ConditionalMacros.h>
+	<Types.h>
+
+1067763551 /home/mmatos/Escritorio/pacman/include/stlport/config/stl_mwerks.h
+	<mslGlobals.h>
+	<ansi_parms.h>
+
+1067763552 /home/mmatos/Escritorio/pacman/include/stlport/config/stl_hpacc.h
+
+1067763552 /home/mmatos/Escritorio/pacman/include/stlport/config/stl_intel.h
+	<config/stl_msvc.h>
+
+1067763551 /home/mmatos/Escritorio/pacman/include/stlport/config/stl_apcc.h
+
+1067763552 /home/mmatos/Escritorio/pacman/include/stlport/config/stl_dec_vms.h
+
+1067763551 /home/mmatos/Escritorio/pacman/include/stlport/config/stl_dec.h
+
+1067763551 /home/mmatos/Escritorio/pacman/include/stlport/config/stl_fujitsu.h
+
+1067763551 /home/mmatos/Escritorio/pacman/include/stlport/config/stl_cray.h
+
+1067763552 /home/mmatos/Escritorio/pacman/include/stlport/config/stl_mycomp.h
+
+1067763551 /home/mmatos/Escritorio/pacman/include/stlport/config/stl_confix.h
+	<mcompile.h>
+
+1067763548 /home/mmatos/Escritorio/pacman/include/stlport/stl/_abbrevs.h
+
+1067763552 /home/mmatos/Escritorio/pacman/include/stlport/config/_prolog.h
+	<config/_msvc_warnings_off.h>
+
+1067763552 /home/mmatos/Escritorio/pacman/include/stlport/config/_msvc_warnings_off.h
+
+1067763546 /home/mmatos/Escritorio/pacman/include/stlport/stl/_list.h
+	<stl/_algobase.h>
+	<stl/_alloc.h>
+	<stl/_iterator.h>
+	<stl/_construct.h>
+	<stl/_function_base.h>
+	<stl/_relops_cont.h>
+	<stl/_list.c>
+	<stl/debug/_list.h>
+	<stl/wrappers/_list.h>
+
+1067763547 /home/mmatos/Escritorio/pacman/include/stlport/stl/_algobase.h
+	<cstddef>
+	<cstring>
+	<climits>
+	<cstdlib>
+	<stl/_pair.h>
+	<stl/_iterator_base.h>
+	<stl/_algobase.c>
+
+1067763541 /home/mmatos/Escritorio/pacman/include/stlport/cstddef
+	<stl/_prolog.h>
+	<stl/_epilog.h>
+
+1067763541 /home/mmatos/Escritorio/pacman/include/stlport/cstring
+	<stl/_prolog.h>
+	<using/cstring>
+	<stl/_epilog.h>
+
+1067763551 /home/mmatos/Escritorio/pacman/include/stlport/using/cstring
+
+1067763542 /home/mmatos/Escritorio/pacman/include/stlport/climits
+	<stl/_prolog.h>
+	</usr/include/limits.h>
+	<limits.h>
+	<stl/_epilog.h>
+
+1254906526 /usr/include/limits.h
+	<features.h>
+	<bits/wordsize.h>
+	<bits/posix1_lim.h>
+	<bits/posix2_lim.h>
+	<bits/xopen_lim.h>
+
+1257988799 /home/mmatos/Escritorio/pacman/include/stlport/cstdlib
+	<stl/_prolog.h>
+	<stl/_epilog.h>
+
+1067763546 /home/mmatos/Escritorio/pacman/include/stlport/stl/_pair.h
+
+1067763548 /home/mmatos/Escritorio/pacman/include/stlport/stl/_iterator_base.h
+	<cstddef>
+	<stl/type_traits.h>
+	<stl/_ptrs_specialize.h>
+	<stl/debug/_debug.h>
+
+1067763548 /home/mmatos/Escritorio/pacman/include/stlport/stl/type_traits.h
+	<stl/_cwchar.h>
+
+1067763548 /home/mmatos/Escritorio/pacman/include/stlport/stl/_cwchar.h
+	<cwchar>
+	<wchar.h>
+
+1067763542 /home/mmatos/Escritorio/pacman/include/stlport/cwchar
+	<stl/_prolog.h>
+	<cstddef>
+	<iosfwd>
+	<stl/_cwchar.h>
+	<stl/_epilog.h>
+
+1067763542 /home/mmatos/Escritorio/pacman/include/stlport/iosfwd
+	<stl/_prolog.h>
+	<cwchar>
+	<stl/_iosfwd.h>
+	<stl/char_traits.h>
+	<wrap_std/iosfwd>
+	<stl/_epilog.h>
+
+1067763547 /home/mmatos/Escritorio/pacman/include/stlport/stl/_iosfwd.h
+	<stl/char_traits.h>
+
+1067763547 /home/mmatos/Escritorio/pacman/include/stlport/stl/char_traits.h
+	<cstddef>
+	<cstring>
+	<sys/types.h>
+	<mem.h>
+	<string.h>
+	<_stddef.h>
+	<stl/type_traits.h>
+	<stl/_cwchar.h>
+	<wrap_std/iosfwd>
+
+1067763542 /home/mmatos/Escritorio/pacman/include/stlport/mem.h
+	<stl/_prolog.h>
+	<rw/stddefs.h>
+	<stl/_epilog.h>
+
+1067763542 /home/mmatos/Escritorio/pacman/include/stlport/string.h
+	<stl/_prolog.h>
+	<using/cstring>
+	<stl/_epilog.h>
+
+1067763553 /home/mmatos/Escritorio/pacman/include/stlport/wrap_std/iosfwd
+	<cstddef>
+	<cstring>
+	<iostream.h>
+	<fstream.h>
+	<stl/char_traits.h>
+	<using/iosfwd>
+
+1067763542 /home/mmatos/Escritorio/pacman/include/stlport/iostream.h
+	<stl/_prolog.h>
+	<iostream.>
+	<iostream>
+	<streambuf.h>
+	<ostream.h>
+	<istream.h>
+	<wrap_std/h/iostream.h>
+	<stl/_epilog.h>
+
+1067763542 /home/mmatos/Escritorio/pacman/include/stlport/iostream
+	<stl/_prolog.h>
+	<stl/_iosfwd.h>
+	<stl/_istream.h>
+	<stl/_null_stream.h>
+	<wrap_std/iostream>
+	<stl/_epilog.h>
+
+1067763543 /home/mmatos/Escritorio/pacman/include/stlport/stl/_istream.h
+	<stl/_cwchar.h>
+	<stl/_ios.h>
+	<stl/_ostream.h>
+	<stl/_istreambuf_iterator.h>
+	<stl/_ctraits_fns.h>
+	<stl/_istream.c>
+
+1067763545 /home/mmatos/Escritorio/pacman/include/stlport/stl/_ios.h
+	<stl/_ios_base.h>
+	<stl/_ctype.h>
+	<stl/_numpunct.h>
+	<stl/_ios.c>
+	<stl/_num_put.h>
+	<stl/_num_get.h>
+	<stl/_monetary.h>
+	<stl/_time_facets.h>
+
+1075043666 /home/mmatos/Escritorio/pacman/include/stlport/stl/_ios_base.h
+	<stdexcept>
+	<utility>
+	<stl/_locale.h>
+	<stl/_string.h>
+
+1257988799 /home/mmatos/Escritorio/pacman/include/stlport/stdexcept
+	<stl/_prolog.h>
+	<exception>
+	<cstring>
+	<stl/_alloc.h>
+	<stl/_string_fwd.h>
+	<stl/_epilog.h>
+
+1067763542 /home/mmatos/Escritorio/pacman/include/stlport/exception
+	<stl/_prolog.h>
+	<config/_msvc_warnings_off.h>
+	<stl/_epilog.h>
+
+1257988799 /home/mmatos/Escritorio/pacman/include/stlport/stl/_alloc.h
+	<cstddef>
+	<stl/debug/_debug.h>
+	<cstdlib>
+	<cstring>
+	<cstdio>
+	<cstdlib>
+	<stl/_new.h>
+	<stl/_threads.h>
+	<stl/_construct.h>
+	<stl/_pthread_alloc.h>
+	<stl/_alloc_old.h>
+	<stl/_alloc.c>
+
+1074105891 /home/mmatos/Escritorio/pacman/include/stlport/stl/debug/_debug.h
+	<stl/_config.h>
+	<stl/_threads.h>
+	<stl/_iterator_base.h>
+	<stl/debug/_debug.c>
+
+1078953929 /home/mmatos/Escritorio/pacman/include/stlport/stl/_threads.h
+	<stl/_config.h>
+	<cstddef>
+	<cstdlib>
+	<mutex.h>
+	<pthread.h>
+	<afx.h>
+	<windows.h>
+	<machine/builtins.h>
+	<stl/_sparc_atomic.h>
+	<ctime>
+	<synch.h>
+	<cstdio>
+	<stl/_cwchar.h>
+	<OS.h>
+	<cassert>
+	<stdio.h>
+	<os2.h>
+	<stl/_threads.c>
+
+1067763541 /home/mmatos/Escritorio/pacman/include/stlport/pthread.h
+	<stl/_prolog.h>
+	"/usr/include/pthread.h"
+	<stl/_epilog.h>
+
+1254906589 /usr/include/pthread.h
+	<features.h>
+	<endian.h>
+	<sched.h>
+	<time.h>
+	<signal.h>
+	<bits/pthreadtypes.h>
+	<bits/setjmp.h>
+	<bits/wordsize.h>
+
+1067763542 /home/mmatos/Escritorio/pacman/include/stlport/time.h
+	<stl/_prolog.h>
+	<stl/_epilog.h>
+
+1067763542 /home/mmatos/Escritorio/pacman/include/stlport/signal.h
+	<stl/_prolog.h>
+	<stl/_epilog.h>
+
+1067763545 /home/mmatos/Escritorio/pacman/include/stlport/stl/_sparc_atomic.h
+
+1067763542 /home/mmatos/Escritorio/pacman/include/stlport/ctime
+	<stl/_prolog.h>
+	<stl/_epilog.h>
+
+1067763542 /home/mmatos/Escritorio/pacman/include/stlport/cstdio
+	<stl/_prolog.h>
+	<stl/_epilog.h>
+
+1067763542 /home/mmatos/Escritorio/pacman/include/stlport/cassert
+	<stl/_prolog.h>
+	<assert.h>
+	<stl/_epilog.h>
+
+1067763542 /home/mmatos/Escritorio/pacman/include/stlport/stdio.h
+	<stl/_prolog.h>
+	<stl/_epilog.h>
+
+1067763545 /home/mmatos/Escritorio/pacman/include/stlport/stl/_threads.c
+	<stl/_threads.h>
+	<time.h>
+	<ctime>
+	<sys/time.h>
+
+1074130325 /home/mmatos/Escritorio/pacman/include/stlport/stl/debug/_debug.c
+	<cstdlib>
+	<stdlib.h>
+	<stl/_threads.h>
+	<cstdlib>
+	<cstdarg>
+	<cstdio>
+
+1067763542 /home/mmatos/Escritorio/pacman/include/stlport/stdlib.h
+	<stl/_prolog.h>
+	<stl/_epilog.h>
+
+1067763541 /home/mmatos/Escritorio/pacman/include/stlport/cstdarg
+	<stl/_prolog.h>
+	<stl/_epilog.h>
+
+1067763546 /home/mmatos/Escritorio/pacman/include/stlport/stl/_new.h
+	<exception>
+	<new>
+
+1067763541 /home/mmatos/Escritorio/pacman/include/stlport/new
+	<stl/_prolog.h>
+	<cstddef>
+	<cstdlib>
+	<new.h>
+	<stl/_new.h>
+	<stl/_epilog.h>
+
+1067763542 /home/mmatos/Escritorio/pacman/include/stlport/new.h
+	<stl/_prolog.h>
+	<new.>
+	<stl/_epilog.h>
+
+1067763544 /home/mmatos/Escritorio/pacman/include/stlport/stl/_construct.h
+	<cstring>
+	<stl/_new.h>
+	<stl/_iterator_base.h>
+
+1067763544 /home/mmatos/Escritorio/pacman/include/stlport/stl/_pthread_alloc.h
+	<pthread.h>
+	<stl/_alloc.h>
+	<stl/_pthread_alloc.c>
+
+1067763544 /home/mmatos/Escritorio/pacman/include/stlport/stl/_pthread_alloc.c
+	<stl/_pthread_alloc.h>
+	<cerrno>
+
+1067763542 /home/mmatos/Escritorio/pacman/include/stlport/cerrno
+	<stl/_prolog.h>
+	<errno.h>
+	<stl/_epilog.h>
+
+1067763548 /home/mmatos/Escritorio/pacman/include/stlport/stl/_alloc_old.h
+
+1067763548 /home/mmatos/Escritorio/pacman/include/stlport/stl/_alloc.c
+	<stl/_alloc.h>
+	<crtdbg.h>
+	<cstdlib>
+
+1067763548 /home/mmatos/Escritorio/pacman/include/stlport/stl/_string_fwd.h
+	<iosfwd>
+
+1067763542 /home/mmatos/Escritorio/pacman/include/stlport/utility
+	<stl/_prolog.h>
+	<stl/type_traits.h>
+	<stl/debug/_debug.h>
+	<stl/_pair.h>
+	<stl/_iterator.h>
+	<stl/_epilog.h>
+
+1067763547 /home/mmatos/Escritorio/pacman/include/stlport/stl/_iterator.h
+	<stl/_iterator_base.h>
+	<stl/_iterator_old.h>
+
+1067763543 /home/mmatos/Escritorio/pacman/include/stlport/stl/_iterator_old.h
+	<stl/_iterator_base.h>
+
+1067763543 /home/mmatos/Escritorio/pacman/include/stlport/stl/_locale.h
+	<cstdlib>
+	<stl/_cwchar.h>
+	<stl/_threads.h>
+	<stl/_string_fwd.h>
+
+1067763545 /home/mmatos/Escritorio/pacman/include/stlport/stl/_string.h
+	<memory>
+	<cctype>
+	<stl/_string_fwd.h>
+	<stl/_function.h>
+	<stl/_ctraits_fns.h>
+	<stl/_algobase.h>
+	<stl/_iterator.h>
+	<stl/msl_string.h>
+	<stl/debug/_string.h>
+	<stl/_string.c>
+	<stl/_string_io.h>
+	<stl/_string_hash.h>
+
+1067763542 /home/mmatos/Escritorio/pacman/include/stlport/memory
+	<stl/_prolog.h>
+	<stl/_alloc.h>
+	<stl/_tempbuf.h>
+	<stl/_raw_storage_iter.h>
+	<stl/_auto_ptr.h>
+	<new_mem.h>
+	<stl/_epilog.h>
+
+1067763543 /home/mmatos/Escritorio/pacman/include/stlport/stl/_tempbuf.h
+	<climits>
+	<cstdlib>
+	<stl/_uninitialized.h>
+	<stl/_tempbuf.c>
+
+1067763548 /home/mmatos/Escritorio/pacman/include/stlport/stl/_uninitialized.h
+	<cstring>
+	<stl/_algobase.h>
+	<stl/_construct.h>
+
+1067763543 /home/mmatos/Escritorio/pacman/include/stlport/stl/_tempbuf.c
+	<stl/_tempbuf.h>
+
+1067763548 /home/mmatos/Escritorio/pacman/include/stlport/stl/_raw_storage_iter.h
+	<stl/_iterator_base.h>
+
+1067763548 /home/mmatos/Escritorio/pacman/include/stlport/stl/_auto_ptr.h
+
+1067763542 /home/mmatos/Escritorio/pacman/include/stlport/cctype
+	<stl/_prolog.h>
+	<ctype.h>
+	<stl/_epilog.h>
+
+1067763541 /home/mmatos/Escritorio/pacman/include/stlport/ctype.h
+	<stl/_prolog.h>
+	<stl/_epilog.h>
+
+1067763548 /home/mmatos/Escritorio/pacman/include/stlport/stl/_function.h
+	<stl/_function_base.h>
+	<stl/_function_adaptors.h>
+
+1067763548 /home/mmatos/Escritorio/pacman/include/stlport/stl/_function_base.h
+	<stl/_config.h>
+
+1067763547 /home/mmatos/Escritorio/pacman/include/stlport/stl/_function_adaptors.h
+
+1067763548 /home/mmatos/Escritorio/pacman/include/stlport/stl/_ctraits_fns.h
+	<stl/_function_base.h>
+
+1067763547 /home/mmatos/Escritorio/pacman/include/stlport/stl/msl_string.h
+
+1067763549 /home/mmatos/Escritorio/pacman/include/stlport/stl/debug/_string.h
+	<stl/debug/_iterator.h>
+
+1067763549 /home/mmatos/Escritorio/pacman/include/stlport/stl/debug/_iterator.h
+	<stl/_pair.h>
+	<stl/_alloc.h>
+
+1067763545 /home/mmatos/Escritorio/pacman/include/stlport/stl/_string.c
+	<stl/_string.h>
+	<stl/_string_fwd.c>
+	<stl/_range_errors.h>
+
+1067763548 /home/mmatos/Escritorio/pacman/include/stlport/stl/_string_fwd.c
+	<stl/_string_fwd.h>
+
+1067763543 /home/mmatos/Escritorio/pacman/include/stlport/stl/_range_errors.h
+	<stdexcept>
+	<string>
+	<cstdlib>
+	<cstdio>
+
+1067763542 /home/mmatos/Escritorio/pacman/include/stlport/string
+	<stl/_prolog.h>
+	<streambuf>
+	<istream>
+	<stl/_string.h>
+	<stl/_string_hash.h>
+	<stl/_epilog.h>
+
+1067763541 /home/mmatos/Escritorio/pacman/include/stlport/streambuf
+	<stl/_prolog.h>
+	<stl/_streambuf.h>
+	<wrap_std/streambuf>
+	<stl/_epilog.h>
+
+1067763545 /home/mmatos/Escritorio/pacman/include/stlport/stl/_streambuf.h
+	<stl/_ios_base.h>
+	<stl/_stdio_file.h>
+	<stl/_streambuf.c>
+
+1067763548 /home/mmatos/Escritorio/pacman/include/stlport/stl/_stdio_file.h
+	<cstdio>
+	<cstddef>
+	<unix.h>
+
+1067763544 /home/mmatos/Escritorio/pacman/include/stlport/stl/_streambuf.c
+	<stl/_streambuf.h>
+
+1067763553 /home/mmatos/Escritorio/pacman/include/stlport/wrap_std/streambuf
+	<wrap_std/h/streambuf.h>
+	<using/streambuf>
+
+1067763553 /home/mmatos/Escritorio/pacman/include/stlport/wrap_std/h/streambuf.h
+	<using/h/streambuf.h>
+
+1067763551 /home/mmatos/Escritorio/pacman/include/stlport/using/h/streambuf.h
+
+1067763551 /home/mmatos/Escritorio/pacman/include/stlport/using/streambuf
+
+1067763542 /home/mmatos/Escritorio/pacman/include/stlport/istream
+	<stl/_prolog.h>
+	<stl/_istream.h>
+	<wrap_std/istream>
+	<stl/_epilog.h>
+
+1067763553 /home/mmatos/Escritorio/pacman/include/stlport/wrap_std/istream
+	<ios>
+	<using/istream>
+
+1067763541 /home/mmatos/Escritorio/pacman/include/stlport/ios
+	<stl/_prolog.h>
+	<stl/_ios.h>
+	<wrap_std/ios>
+	<stl/_epilog.h>
+
+1067763553 /home/mmatos/Escritorio/pacman/include/stlport/wrap_std/ios
+	<using/ios>
+	<wrap_std/h/iostream.h>
+
+1067763551 /home/mmatos/Escritorio/pacman/include/stlport/using/ios
+
+1067763553 /home/mmatos/Escritorio/pacman/include/stlport/wrap_std/h/iostream.h
+	<using/h/iostream.h>
+
+1067763551 /home/mmatos/Escritorio/pacman/include/stlport/using/h/iostream.h
+
+1067763551 /home/mmatos/Escritorio/pacman/include/stlport/using/istream
+	<using/ostream>
+
+1067763551 /home/mmatos/Escritorio/pacman/include/stlport/using/ostream
+
+1067763548 /home/mmatos/Escritorio/pacman/include/stlport/stl/_string_hash.h
+	<stl/_hash_fun.h>
+	<stl/_string.h>
+
+1067763544 /home/mmatos/Escritorio/pacman/include/stlport/stl/_hash_fun.h
+	<cstddef>
+
+1067763547 /home/mmatos/Escritorio/pacman/include/stlport/stl/_string_io.h
+	<string>
+	<stl/_string_io.c>
+
+1067763547 /home/mmatos/Escritorio/pacman/include/stlport/stl/_string_io.c
+	<stl/_string_io.h>
+	<stl/_ctype.h>
+
+1067763545 /home/mmatos/Escritorio/pacman/include/stlport/stl/_ctype.h
+	<stl/c_locale.h>
+	<stl/_locale.h>
+	<stl/_algobase.h>
+
+1257988799 /home/mmatos/Escritorio/pacman/include/stlport/stl/c_locale.h
+	<stl/_config.h>
+	<sgidefs.h>
+	<standards.h>
+	<wchar.h>
+	<ctype.h>
+	<sgidefs.h>
+	<standards.h>
+	<cstddef>
+	<stl/_cwchar.h>
+	<cctype>
+	<stddef.h>
+	<wchar.h>
+	<ctype.h>
+
+1067763542 /home/mmatos/Escritorio/pacman/include/stlport/wchar.h
+	<stl/_prolog.h>
+	<stl/_epilog.h>
+
+1067763543 /home/mmatos/Escritorio/pacman/include/stlport/stl/_numpunct.h
+	<stl/_ios_base.h>
+	<stl/c_locale.h>
+	<stl/_string.h>
+
+1067763545 /home/mmatos/Escritorio/pacman/include/stlport/stl/_ios.c
+	<stl/_ios.h>
+	<stl/_streambuf.h>
+	<stl/_numpunct.h>
+
+1067763548 /home/mmatos/Escritorio/pacman/include/stlport/stl/_num_put.h
+	<stl/_numpunct.h>
+	<stl/_ctype.h>
+	<stl/_ostreambuf_iterator.h>
+	<stl/_num_put.c>
+
+1067763548 /home/mmatos/Escritorio/pacman/include/stlport/stl/_ostreambuf_iterator.h
+	<stl/_streambuf.h>
+
+1067763548 /home/mmatos/Escritorio/pacman/include/stlport/stl/_num_put.c
+	<stl/_num_put.h>
+	<stl/_limits.h>
+
+1067763546 /home/mmatos/Escritorio/pacman/include/stlport/stl/_limits.h
+	<climits>
+	<cfloat>
+	<stl/_cwchar.h>
+	<stl/_limits.c>
+
+1067763542 /home/mmatos/Escritorio/pacman/include/stlport/cfloat
+	<stl/_prolog.h>
+	<stl/_epilog.h>
+
+1067763546 /home/mmatos/Escritorio/pacman/include/stlport/stl/_limits.c
+	<stl/_limits.h>
+
+1067763548 /home/mmatos/Escritorio/pacman/include/stlport/stl/_num_get.h
+	<stl/_istreambuf_iterator.h>
+	<stl/c_locale.h>
+	<stl/_numpunct.h>
+	<stl/_ctype.h>
+	<stl/_num_get.c>
+
+1067763548 /home/mmatos/Escritorio/pacman/include/stlport/stl/_istreambuf_iterator.h
+	<stl/_iterator_base.h>
+	<stl/_streambuf.h>
+
+1067763548 /home/mmatos/Escritorio/pacman/include/stlport/stl/_num_get.c
+	<stl/_num_get.h>
+	<stl/_limits.h>
+
+1067763544 /home/mmatos/Escritorio/pacman/include/stlport/stl/_monetary.h
+	<stl/_ctype.h>
+	<stl/_ostreambuf_iterator.h>
+	<stl/_istreambuf_iterator.h>
+	<stl/_monetary.c>
+
+1067763544 /home/mmatos/Escritorio/pacman/include/stlport/stl/_monetary.c
+	<stl/_monetary.h>
+	<stl/_ios.h>
+	<stl/_num_put.h>
+	<stl/_num_get.h>
+
+1067763548 /home/mmatos/Escritorio/pacman/include/stlport/stl/_time_facets.h
+	<ctime>
+	<stl/c_locale.h>
+	<stl/_ios_base.h>
+	<stl/_time_facets.c>
+
+1067763548 /home/mmatos/Escritorio/pacman/include/stlport/stl/_time_facets.c
+	<stl/_time_facets.h>
+	<stl/_num_put.h>
+	<stl/_num_get.h>
+
+1067763547 /home/mmatos/Escritorio/pacman/include/stlport/stl/_ostream.h
+	<stl/_ios.h>
+	<stl/_ostreambuf_iterator.h>
+	<stl/_ostream.c>
+
+1067763547 /home/mmatos/Escritorio/pacman/include/stlport/stl/_ostream.c
+	<stl/_ostream.h>
+	<stl/_num_put.h>
+
+1067763543 /home/mmatos/Escritorio/pacman/include/stlport/stl/_istream.c
+	<stl/_istream.h>
+	<stl/_limits.h>
+	<stl/_num_get.h>
+
+1067763543 /home/mmatos/Escritorio/pacman/include/stlport/stl/_null_stream.h
+
+1067763553 /home/mmatos/Escritorio/pacman/include/stlport/wrap_std/iostream
+	<cwchar>
+	<ios>
+	<using/iostream>
+	<wrap_std/h/iostream.h>
+
+1067763551 /home/mmatos/Escritorio/pacman/include/stlport/using/iostream
+	<using/istream>
+
+1067763542 /home/mmatos/Escritorio/pacman/include/stlport/streambuf.h
+	<stl/_prolog.h>
+	<streambuf.>
+	<streambuf>
+	<ios.h>
+	<stl/_epilog.h>
+
+1067763542 /home/mmatos/Escritorio/pacman/include/stlport/ios.h
+	<stl/_prolog.h>
+	<ios.>
+	<ios>
+	<using/ios>
+	<stl/_epilog.h>
+
+1067763542 /home/mmatos/Escritorio/pacman/include/stlport/ostream.h
+	<stl/_prolog.h>
+	<ostream.>
+	<ostream>
+	<using/ostream>
+	<using/h/ostream.h>
+	<stl/_epilog.h>
+
+1067763542 /home/mmatos/Escritorio/pacman/include/stlport/ostream
+	<stl/_prolog.h>
+	<stl/_ostream.h>
+	<wrap_std/ostream>
+	<stl/_epilog.h>
+
+1067763553 /home/mmatos/Escritorio/pacman/include/stlport/wrap_std/ostream
+	<ios>
+	<using/ostream>
+	<using/h/ostream.h>
+
+1067763551 /home/mmatos/Escritorio/pacman/include/stlport/using/h/ostream.h
+
+1067763542 /home/mmatos/Escritorio/pacman/include/stlport/istream.h
+	<stl/_prolog.h>
+	<istream>
+	<stl/_epilog.h>
+
+1067763542 /home/mmatos/Escritorio/pacman/include/stlport/fstream.h
+	<stl/_prolog.h>
+	<fstream.>
+	<fstream>
+	<iostream.h>
+	<using/fstream>
+	<wrap_std/h/fstream.h>
+	<stl/_epilog.h>
+
+1067763542 /home/mmatos/Escritorio/pacman/include/stlport/fstream
+	<stl/_prolog.h>
+	<stl/_fstream.h>
+	<wrap_std/fstream>
+	<stl/_epilog.h>
+
+1067763546 /home/mmatos/Escritorio/pacman/include/stlport/stl/_fstream.h
+	<stl/_streambuf.h>
+	<stl/_istream.h>
+	<stl/_codecvt.h>
+	<stl/_stdio_file.h>
+	<stl/_fstream.c>
+
+1067763548 /home/mmatos/Escritorio/pacman/include/stlport/stl/_codecvt.h
+	<stl/c_locale.h>
+	<stl/_locale.h>
+
+1067763546 /home/mmatos/Escritorio/pacman/include/stlport/stl/_fstream.c
+	<stl/_fstream.h>
+
+1067763553 /home/mmatos/Escritorio/pacman/include/stlport/wrap_std/fstream
+	<using/fstream>
+	<wrap_std/h/fstream.h>
+
+1067763551 /home/mmatos/Escritorio/pacman/include/stlport/using/fstream
+
+1067763553 /home/mmatos/Escritorio/pacman/include/stlport/wrap_std/h/fstream.h
+	<using/h/fstream.h>
+
+976236923 /home/mmatos/Escritorio/pacman/include/stlport/using/h/fstream.h
+
+1067763551 /home/mmatos/Escritorio/pacman/include/stlport/using/iosfwd
+
+1067763546 /home/mmatos/Escritorio/pacman/include/stlport/stl/_ptrs_specialize.h
+
+1067763547 /home/mmatos/Escritorio/pacman/include/stlport/stl/_algobase.c
+	<stl/_algobase.h>
+	<stl/_iterator.h>
+
+1067763543 /home/mmatos/Escritorio/pacman/include/stlport/stl/_relops_cont.h
+
+1067763546 /home/mmatos/Escritorio/pacman/include/stlport/stl/_list.c
+	<stl/_list.h>
+	<vector>
+
+1067763542 /home/mmatos/Escritorio/pacman/include/stlport/vector
+	<stl/_prolog.h>
+	<stl/_algobase.h>
+	<stl/_vector.h>
+	<stl/_epilog.h>
+
+1067763548 /home/mmatos/Escritorio/pacman/include/stlport/stl/_vector.h
+	<stl/_algobase.h>
+	<stl/_alloc.h>
+	<stl/_iterator.h>
+	<stl/_uninitialized.h>
+	<stl/_range_errors.h>
+	<stl/_relops_cont.h>
+	<stl/_vector.c>
+	<stl/_bvector.h>
+	<stl/debug/_vector.h>
+	<stl/wrappers/_vector.h>
+
+1067763548 /home/mmatos/Escritorio/pacman/include/stlport/stl/_vector.c
+	<stl/_vector.h>
+
+1067763547 /home/mmatos/Escritorio/pacman/include/stlport/stl/_bvector.h
+	<stl/_vector.h>
+	<stl/_relops_cont.h>
+
+1067763549 /home/mmatos/Escritorio/pacman/include/stlport/stl/debug/_vector.h
+	<stl/debug/_iterator.h>
+	<stl/debug/_relops_cont.h>
+
+1067763549 /home/mmatos/Escritorio/pacman/include/stlport/stl/debug/_relops_cont.h
+
+1067763549 /home/mmatos/Escritorio/pacman/include/stlport/stl/wrappers/_vector.h
+	<stl/_vector.h>
+
+1067763549 /home/mmatos/Escritorio/pacman/include/stlport/stl/debug/_list.h
+	<stl/debug/_iterator.h>
+	<stl/debug/_relops_cont.h>
+
+1067763549 /home/mmatos/Escritorio/pacman/include/stlport/stl/wrappers/_list.h
+	<stl/_list.h>
+
+1257569890 /home/mmatos/Escritorio/pacman/include/gliese/Game.h
+	"ApplicationState.h"
+	"LogicObject.h"
+	"Rule.h"
+	"Observer.h"
+	"PriorityComponentManager.h"
+	"GameSpace.h"
+	"iostream"
+	"list"
+	"map"
+
+1254183944 /home/mmatos/Escritorio/pacman/include/gliese/ApplicationState.h
+	"VisualObjectRenderer.h"
+
+1254183944 /home/mmatos/Escritorio/pacman/include/gliese/VisualObjectRenderer.h
+	"ComponentManager.h"
+	"Rectangle.h"
+
+1257569412 /home/mmatos/Escritorio/pacman/include/gliese/ComponentManager.h
+	"Component.h"
+	"hash_map"
+	"map"
+	"string"
+	"iostream"
+	"typeinfo"
+
+1257112894 /home/mmatos/Escritorio/pacman/include/gliese/Component.h
+	"Observable.h"
+	"Observer.h"
+	"set"
+	"string"
+
+1067763541 /home/mmatos/Escritorio/pacman/include/stlport/set
+	<stl/_prolog.h>
+	<stl/_set.h>
+	<stl/_epilog.h>
+
+1067763546 /home/mmatos/Escritorio/pacman/include/stlport/stl/_set.h
+	<stl/_tree.h>
+	<stl/_relops_cont.h>
+	<stl/_relops_cont.h>
+	<stl/wrappers/_set.h>
+
+1067763547 /home/mmatos/Escritorio/pacman/include/stlport/stl/_tree.h
+	<stl/_algobase.h>
+	<stl/_alloc.h>
+	<stl/_iterator.h>
+	<stl/_construct.h>
+	<stl/_function_base.h>
+	<stl/_tree.c>
+	<stl/debug/_tree.h>
+
+1067763547 /home/mmatos/Escritorio/pacman/include/stlport/stl/_tree.c
+	<stl/_tree.h>
+
+1067763549 /home/mmatos/Escritorio/pacman/include/stlport/stl/debug/_tree.h
+	<stl/debug/_iterator.h>
+	<stl/_function.h>
+	<stl/_alloc.h>
+	<stl/debug/_relops_cont.h>
+
+1067763549 /home/mmatos/Escritorio/pacman/include/stlport/stl/wrappers/_set.h
+	<stl/_set.h>
+
+1067763542 /home/mmatos/Escritorio/pacman/include/stlport/hash_map
+	<stl/_prolog.h>
+	<stl/_hash_map.h>
+	<stl/_epilog.h>
+
+1067763545 /home/mmatos/Escritorio/pacman/include/stlport/stl/_hash_map.h
+	<stl/_hashtable.h>
+	<stl/_relops_hash_cont.h>
+	<stl/_relops_hash_cont.h>
+	<stl/wrappers/_hash_map.h>
+
+1067763547 /home/mmatos/Escritorio/pacman/include/stlport/stl/_hashtable.h
+	<stl/_vector.h>
+	<stl/_iterator.h>
+	<stl/_function_base.h>
+	<stl/_algobase.h>
+	<stl/_hash_fun.h>
+	<stl/_relops_hash_cont.h>
+	<stl/_hashtable.c>
+	<stl/debug/_hashtable.h>
+
+1067763544 /home/mmatos/Escritorio/pacman/include/stlport/stl/_relops_hash_cont.h
+
+1067763547 /home/mmatos/Escritorio/pacman/include/stlport/stl/_hashtable.c
+	<stl/_hashtable.h>
+
+1067763549 /home/mmatos/Escritorio/pacman/include/stlport/stl/debug/_hashtable.h
+	<stl/debug/_iterator.h>
+	<stl/debug/_relops_hash_cont.h>
+
+1067763549 /home/mmatos/Escritorio/pacman/include/stlport/stl/debug/_relops_hash_cont.h
+
+1067763549 /home/mmatos/Escritorio/pacman/include/stlport/stl/wrappers/_hash_map.h
+	<stl/_hash_map.h>
+
+1067763541 /home/mmatos/Escritorio/pacman/include/stlport/map
+	<stl/_prolog.h>
+	<stl/_map.h>
+	<stl/_epilog.h>
+
+1067763546 /home/mmatos/Escritorio/pacman/include/stlport/stl/_map.h
+	<stl/_tree.h>
+	<stl/_relops_cont.h>
+	<stl/_relops_cont.h>
+	<stl/wrappers/_map.h>
+
+1067763549 /home/mmatos/Escritorio/pacman/include/stlport/stl/wrappers/_map.h
+	<stl/_map.h>
+
+1067763542 /home/mmatos/Escritorio/pacman/include/stlport/typeinfo
+	<stl/_prolog.h>
+	<typeinfo.h>
+	<exception>
+	<stl/_epilog.h>
+
+1067763542 /home/mmatos/Escritorio/pacman/include/stlport/typeinfo.h
+	<stl/_prolog.h>
+	<typeinfo>
+	<stl/_epilog.h>
+
+1254183944 /home/mmatos/Escritorio/pacman/include/gliese/Rectangle.h
+	"Shape.h"
+
+1254183944 /home/mmatos/Escritorio/pacman/include/gliese/Shape.h
+
+1256963852 /home/mmatos/Escritorio/pacman/include/gliese/LogicObject.h
+	"Action.h"
+	"Component.h"
+	"Shape.h"
+	"Variables.h"
+	"list"
+	"map"
+	"string"
+	"iostream"
+
+1254599428 /home/mmatos/Escritorio/pacman/include/gliese/Variables.h
+	"any.hpp"
+	"hash_map"
+	"ostream"
+	"string"
+
+1255814374 /home/mmatos/Escritorio/pacman/include/gliese/any.hpp
+	<algorithm>
+	<typeinfo>
+	<ostream>
+	"boost/config.hpp"
+	<boost/type_traits/remove_reference.hpp>
+	<boost/type_traits/is_reference.hpp>
+	<boost/throw_exception.hpp>
+	<boost/static_assert.hpp>
+
+1067763542 /home/mmatos/Escritorio/pacman/include/stlport/algorithm
+	<stl/_prolog.h>
+	<cstdio>
+	<stl/_algo.h>
+	<stl/_epilog.h>
+
+1067763544 /home/mmatos/Escritorio/pacman/include/stlport/stl/_algo.h
+	<stl/_algobase.h>
+	<stl/_tempbuf.h>
+	<stl/_heap.h>
+	<stl/_iterator.h>
+	<stl/_function_base.h>
+	<cstdio>
+	<stl/_algo.c>
+
+1067763545 /home/mmatos/Escritorio/pacman/include/stlport/stl/_heap.h
+	<stl/_config.h>
+	<stl/_heap.c>
+
+1067763545 /home/mmatos/Escritorio/pacman/include/stlport/stl/_heap.c
+	<stl/_heap.h>
+	<stl/_iterator_base.h>
+
+1067763543 /home/mmatos/Escritorio/pacman/include/stlport/stl/_algo.c
+	<stl/_algo.h>
+
+1088731284 /home/mmatos/Escritorio/pacman/include/boost/config.hpp
+	<boost/config/select_compiler_config.hpp>
+	<boost/config/select_stdlib_config.hpp>
+	<boost/config/select_platform_config.hpp>
+	<boost/config/suffix.hpp>
+
+1071836218 /home/mmatos/Escritorio/pacman/include/boost/config/select_compiler_config.hpp
+
+1083583613 /home/mmatos/Escritorio/pacman/include/boost/config/select_stdlib_config.hpp
+	<utility>
+
+1124898317 /home/mmatos/Escritorio/pacman/include/boost/config/select_platform_config.hpp
+	<boost/config/posix_features.hpp>
+
+1082272213 /home/mmatos/Escritorio/pacman/include/boost/config/posix_features.hpp
+	<unistd.h>
+
+1119357322 /home/mmatos/Escritorio/pacman/include/boost/config/suffix.hpp
+	<limits.h>
+	<cstddef>
+	"boost/type.hpp"
+	"boost/non_type.hpp"
+
+1090801918 /home/mmatos/Escritorio/pacman/include/boost/type.hpp
+
+1084699075 /home/mmatos/Escritorio/pacman/include/boost/non_type.hpp
+
+1070458376 /home/mmatos/Escritorio/pacman/include/boost/type_traits/remove_reference.hpp
+	"boost/type_traits/broken_compiler_spec.hpp"
+	"boost/config.hpp"
+	"boost/type_traits/detail/type_trait_def.hpp"
+	"boost/type_traits/detail/type_trait_undef.hpp"
+
+1094139687 /home/mmatos/Escritorio/pacman/include/boost/type_traits/broken_compiler_spec.hpp
+	"boost/mpl/aux_/lambda_support.hpp"
+	"boost/config.hpp"
+	"boost/type_traits/detail/type_trait_undef.hpp"
+
+1101605825 /home/mmatos/Escritorio/pacman/include/boost/mpl/aux_/lambda_support.hpp
+	<boost/mpl/aux_/config/lambda.hpp>
+	<boost/mpl/int_fwd.hpp>
+	<boost/mpl/aux_/yes_no.hpp>
+	<boost/mpl/aux_/na_fwd.hpp>
+	<boost/mpl/aux_/preprocessor/params.hpp>
+	<boost/mpl/aux_/preprocessor/enum.hpp>
+	<boost/mpl/aux_/config/msvc.hpp>
+	<boost/mpl/aux_/config/workaround.hpp>
+	<boost/preprocessor/tuple/to_list.hpp>
+	<boost/preprocessor/list/for_each_i.hpp>
+	<boost/preprocessor/inc.hpp>
+	<boost/preprocessor/cat.hpp>
+
+1094139645 /home/mmatos/Escritorio/pacman/include/boost/mpl/aux_/config/lambda.hpp
+	<boost/mpl/aux_/config/ttp.hpp>
+	<boost/mpl/aux_/config/ctps.hpp>
+
+1094139645 /home/mmatos/Escritorio/pacman/include/boost/mpl/aux_/config/ttp.hpp
+	<boost/mpl/aux_/config/msvc.hpp>
+	<boost/mpl/aux_/config/gcc.hpp>
+	<boost/mpl/aux_/config/workaround.hpp>
+
+1094139645 /home/mmatos/Escritorio/pacman/include/boost/mpl/aux_/config/msvc.hpp
+	<boost/config.hpp>
+
+1094139645 /home/mmatos/Escritorio/pacman/include/boost/mpl/aux_/config/gcc.hpp
+
+1094139645 /home/mmatos/Escritorio/pacman/include/boost/mpl/aux_/config/workaround.hpp
+	<boost/detail/workaround.hpp>
+
+1090801919 /home/mmatos/Escritorio/pacman/include/boost/detail/workaround.hpp
+
+1094139645 /home/mmatos/Escritorio/pacman/include/boost/mpl/aux_/config/ctps.hpp
+	<boost/mpl/aux_/config/workaround.hpp>
+	<boost/config.hpp>
+
+1094139641 /home/mmatos/Escritorio/pacman/include/boost/mpl/int_fwd.hpp
+	<boost/mpl/aux_/adl_barrier.hpp>
+	<boost/mpl/aux_/nttp_decl.hpp>
+
+1096379819 /home/mmatos/Escritorio/pacman/include/boost/mpl/aux_/adl_barrier.hpp
+	<boost/mpl/aux_/config/adl.hpp>
+	<boost/mpl/aux_/config/gcc.hpp>
+	<boost/mpl/aux_/config/workaround.hpp>
+
+1095343727 /home/mmatos/Escritorio/pacman/include/boost/mpl/aux_/config/adl.hpp
+	<boost/mpl/aux_/config/msvc.hpp>
+	<boost/mpl/aux_/config/intel.hpp>
+	<boost/mpl/aux_/config/gcc.hpp>
+	<boost/mpl/aux_/config/workaround.hpp>
+
+1094139645 /home/mmatos/Escritorio/pacman/include/boost/mpl/aux_/config/intel.hpp
+	<boost/config.hpp>
+
+1103236985 /home/mmatos/Escritorio/pacman/include/boost/mpl/aux_/nttp_decl.hpp
+	<boost/mpl/aux_/config/nttp.hpp>
+	<boost/preprocessor/cat.hpp>
+
+1094139645 /home/mmatos/Escritorio/pacman/include/boost/mpl/aux_/config/nttp.hpp
+	<boost/mpl/aux_/config/msvc.hpp>
+	<boost/mpl/aux_/config/workaround.hpp>
+
+1095090664 /home/mmatos/Escritorio/pacman/include/boost/preprocessor/cat.hpp
+	<boost/preprocessor/config/config.hpp>
+
+1091345065 /home/mmatos/Escritorio/pacman/include/boost/preprocessor/config/config.hpp
+
+1096379819 /home/mmatos/Escritorio/pacman/include/boost/mpl/aux_/yes_no.hpp
+	<boost/mpl/aux_/nttp_decl.hpp>
+	<boost/mpl/aux_/config/arrays.hpp>
+	<boost/mpl/aux_/config/msvc.hpp>
+	<boost/mpl/aux_/config/workaround.hpp>
+
+1094227015 /home/mmatos/Escritorio/pacman/include/boost/mpl/aux_/config/arrays.hpp
+	<boost/mpl/aux_/config/msvc.hpp>
+	<boost/mpl/aux_/config/workaround.hpp>
+
+1101605850 /home/mmatos/Escritorio/pacman/include/boost/mpl/aux_/na_fwd.hpp
+	<boost/mpl/aux_/adl_barrier.hpp>
+
+1094139656 /home/mmatos/Escritorio/pacman/include/boost/mpl/aux_/preprocessor/params.hpp
+	<boost/mpl/aux_/config/preprocessor.hpp>
+	<boost/preprocessor/cat.hpp>
+	<boost/preprocessor/comma_if.hpp>
+	<boost/preprocessor/repeat.hpp>
+	<boost/preprocessor/inc.hpp>
+	<boost/preprocessor/cat.hpp>
+
+1094139645 /home/mmatos/Escritorio/pacman/include/boost/mpl/aux_/config/preprocessor.hpp
+	<boost/mpl/aux_/config/workaround.hpp>
+
+1090899808 /home/mmatos/Escritorio/pacman/include/boost/preprocessor/comma_if.hpp
+	<boost/preprocessor/punctuation/comma_if.hpp>
+
+1095090686 /home/mmatos/Escritorio/pacman/include/boost/preprocessor/punctuation/comma_if.hpp
+	<boost/preprocessor/config/config.hpp>
+	<boost/preprocessor/control/if.hpp>
+	<boost/preprocessor/facilities/empty.hpp>
+	<boost/preprocessor/punctuation/comma.hpp>
+
+1095090667 /home/mmatos/Escritorio/pacman/include/boost/preprocessor/control/if.hpp
+	<boost/preprocessor/config/config.hpp>
+	<boost/preprocessor/control/iif.hpp>
+	<boost/preprocessor/logical/bool.hpp>
+
+1090899809 /home/mmatos/Escritorio/pacman/include/boost/preprocessor/control/iif.hpp
+	<boost/preprocessor/config/config.hpp>
+
+1095090685 /home/mmatos/Escritorio/pacman/include/boost/preprocessor/logical/bool.hpp
+	<boost/preprocessor/config/config.hpp>
+
+1095090668 /home/mmatos/Escritorio/pacman/include/boost/preprocessor/facilities/empty.hpp
+
+1095090686 /home/mmatos/Escritorio/pacman/include/boost/preprocessor/punctuation/comma.hpp
+
+1090899808 /home/mmatos/Escritorio/pacman/include/boost/preprocessor/repeat.hpp
+	<boost/preprocessor/repetition/repeat.hpp>
+
+1095090688 /home/mmatos/Escritorio/pacman/include/boost/preprocessor/repetition/repeat.hpp
+	<boost/preprocessor/cat.hpp>
+	<boost/preprocessor/config/config.hpp>
+	<boost/preprocessor/debug/error.hpp>
+	<boost/preprocessor/detail/auto_rec.hpp>
+	<boost/preprocessor/tuple/eat.hpp>
+
+1090899809 /home/mmatos/Escritorio/pacman/include/boost/preprocessor/debug/error.hpp
+	<boost/preprocessor/cat.hpp>
+	<boost/preprocessor/config/config.hpp>
+
+1091345066 /home/mmatos/Escritorio/pacman/include/boost/preprocessor/detail/auto_rec.hpp
+	<boost/preprocessor/config/config.hpp>
+	<boost/preprocessor/detail/dmc/auto_rec.hpp>
+	<boost/preprocessor/control/iif.hpp>
+
+1091345066 /home/mmatos/Escritorio/pacman/include/boost/preprocessor/detail/dmc/auto_rec.hpp
+	<boost/preprocessor/control/iif.hpp>
+
+1095090688 /home/mmatos/Escritorio/pacman/include/boost/preprocessor/tuple/eat.hpp
+	<boost/preprocessor/config/config.hpp>
+
+1090899808 /home/mmatos/Escritorio/pacman/include/boost/preprocessor/inc.hpp
+	<boost/preprocessor/arithmetic/inc.hpp>
+
+1095090664 /home/mmatos/Escritorio/pacman/include/boost/preprocessor/arithmetic/inc.hpp
+	<boost/preprocessor/config/config.hpp>
+
+1094139656 /home/mmatos/Escritorio/pacman/include/boost/mpl/aux_/preprocessor/enum.hpp
+	<boost/mpl/aux_/config/preprocessor.hpp>
+	<boost/preprocessor/cat.hpp>
+	<boost/preprocessor/comma_if.hpp>
+	<boost/preprocessor/repeat.hpp>
+
+1095090688 /home/mmatos/Escritorio/pacman/include/boost/preprocessor/tuple/to_list.hpp
+	<boost/preprocessor/config/config.hpp>
+
+1095090684 /home/mmatos/Escritorio/pacman/include/boost/preprocessor/list/for_each_i.hpp
+	<boost/preprocessor/arithmetic/inc.hpp>
+	<boost/preprocessor/config/config.hpp>
+	<boost/preprocessor/list/adt.hpp>
+	<boost/preprocessor/repetition/for.hpp>
+	<boost/preprocessor/tuple/elem.hpp>
+	<boost/preprocessor/tuple/rem.hpp>
+
+1095090684 /home/mmatos/Escritorio/pacman/include/boost/preprocessor/list/adt.hpp
+	<boost/preprocessor/config/config.hpp>
+	<boost/preprocessor/detail/is_binary.hpp>
+	<boost/preprocessor/logical/compl.hpp>
+	<boost/preprocessor/tuple/eat.hpp>
+
+1090899809 /home/mmatos/Escritorio/pacman/include/boost/preprocessor/detail/is_binary.hpp
+	<boost/preprocessor/config/config.hpp>
+	<boost/preprocessor/detail/check.hpp>
+
+1091345066 /home/mmatos/Escritorio/pacman/include/boost/preprocessor/detail/check.hpp
+	<boost/preprocessor/cat.hpp>
+	<boost/preprocessor/config/config.hpp>
+
+1090899810 /home/mmatos/Escritorio/pacman/include/boost/preprocessor/logical/compl.hpp
+	<boost/preprocessor/config/config.hpp>
+
+1095090688 /home/mmatos/Escritorio/pacman/include/boost/preprocessor/repetition/for.hpp
+	<boost/preprocessor/cat.hpp>
+	<boost/preprocessor/debug/error.hpp>
+	<boost/preprocessor/detail/auto_rec.hpp>
+	<boost/preprocessor/repetition/detail/edg/for.hpp>
+	<boost/preprocessor/repetition/detail/msvc/for.hpp>
+	<boost/preprocessor/repetition/detail/dmc/for.hpp>
+	<boost/preprocessor/repetition/detail/for.hpp>
+
+1095090687 /home/mmatos/Escritorio/pacman/include/boost/preprocessor/repetition/detail/edg/for.hpp
+	<boost/preprocessor/control/if.hpp>
+	<boost/preprocessor/tuple/eat.hpp>
+
+1095090687 /home/mmatos/Escritorio/pacman/include/boost/preprocessor/repetition/detail/msvc/for.hpp
+	<boost/preprocessor/control/if.hpp>
+	<boost/preprocessor/tuple/eat.hpp>
+
+1095090686 /home/mmatos/Escritorio/pacman/include/boost/preprocessor/repetition/detail/dmc/for.hpp
+	<boost/preprocessor/control/expr_iif.hpp>
+	<boost/preprocessor/control/iif.hpp>
+	<boost/preprocessor/logical/bool.hpp>
+	<boost/preprocessor/tuple/eat.hpp>
+
+1090899809 /home/mmatos/Escritorio/pacman/include/boost/preprocessor/control/expr_iif.hpp
+	<boost/preprocessor/config/config.hpp>
+
+1095090687 /home/mmatos/Escritorio/pacman/include/boost/preprocessor/repetition/detail/for.hpp
+	<boost/preprocessor/control/expr_iif.hpp>
+	<boost/preprocessor/control/iif.hpp>
+	<boost/preprocessor/logical/bool.hpp>
+	<boost/preprocessor/tuple/eat.hpp>
+
+1095090688 /home/mmatos/Escritorio/pacman/include/boost/preprocessor/tuple/elem.hpp
+	<boost/preprocessor/config/config.hpp>
+
+1090899811 /home/mmatos/Escritorio/pacman/include/boost/preprocessor/tuple/rem.hpp
+	<boost/preprocessor/config/config.hpp>
+
+1094139687 /home/mmatos/Escritorio/pacman/include/boost/type_traits/detail/type_trait_undef.hpp
+
+1094139687 /home/mmatos/Escritorio/pacman/include/boost/type_traits/detail/type_trait_def.hpp
+	<boost/type_traits/detail/template_arity_spec.hpp>
+	<boost/mpl/aux_/lambda_support.hpp>
+
+1094139687 /home/mmatos/Escritorio/pacman/include/boost/type_traits/detail/template_arity_spec.hpp
+	<boost/mpl/int.hpp>
+	<boost/mpl/aux_/template_arity_fwd.hpp>
+	<boost/mpl/aux_/preprocessor/params.hpp>
+	<boost/mpl/aux_/config/lambda.hpp>
+	<boost/mpl/aux_/config/overload_resolution.hpp>
+
+1094139641 /home/mmatos/Escritorio/pacman/include/boost/mpl/int.hpp
+	<boost/mpl/int_fwd.hpp>
+	<boost/mpl/aux_/integral_wrapper.hpp>
+
+1094139643 /home/mmatos/Escritorio/pacman/include/boost/mpl/aux_/integral_wrapper.hpp
+	<boost/mpl/integral_c_tag.hpp>
+	<boost/mpl/aux_/static_cast.hpp>
+	<boost/mpl/aux_/nttp_decl.hpp>
+	<boost/mpl/aux_/config/static_constant.hpp>
+	<boost/mpl/aux_/config/workaround.hpp>
+	<boost/preprocessor/cat.hpp>
+
+1096379818 /home/mmatos/Escritorio/pacman/include/boost/mpl/integral_c_tag.hpp
+	<boost/mpl/aux_/adl_barrier.hpp>
+	<boost/mpl/aux_/config/static_constant.hpp>
+
+1094547092 /home/mmatos/Escritorio/pacman/include/boost/mpl/aux_/config/static_constant.hpp
+	<boost/config.hpp>
+
+1094139644 /home/mmatos/Escritorio/pacman/include/boost/mpl/aux_/static_cast.hpp
+	<boost/mpl/aux_/config/workaround.hpp>
+
+1094139644 /home/mmatos/Escritorio/pacman/include/boost/mpl/aux_/template_arity_fwd.hpp
+
+1094139645 /home/mmatos/Escritorio/pacman/include/boost/mpl/aux_/config/overload_resolution.hpp
+	<boost/mpl/aux_/config/workaround.hpp>
+
+1110992752 /home/mmatos/Escritorio/pacman/include/boost/type_traits/is_reference.hpp
+	"boost/type_traits/config.hpp"
+	"boost/type_traits/detail/yes_no_type.hpp"
+	"boost/type_traits/detail/wrap.hpp"
+	"boost/type_traits/detail/bool_trait_def.hpp"
+	"boost/type_traits/detail/bool_trait_undef.hpp"
+
+1118219437 /home/mmatos/Escritorio/pacman/include/boost/type_traits/config.hpp
+	"boost/config.hpp"
+
+1070458376 /home/mmatos/Escritorio/pacman/include/boost/type_traits/detail/yes_no_type.hpp
+
+1070458376 /home/mmatos/Escritorio/pacman/include/boost/type_traits/detail/wrap.hpp
+
+1110975742 /home/mmatos/Escritorio/pacman/include/boost/type_traits/detail/bool_trait_def.hpp
+	<boost/type_traits/detail/template_arity_spec.hpp>
+	<boost/type_traits/integral_constant.hpp>
+	<boost/mpl/bool.hpp>
+	<boost/mpl/aux_/lambda_support.hpp>
+	<boost/config.hpp>
+
+1107100064 /home/mmatos/Escritorio/pacman/include/boost/type_traits/integral_constant.hpp
+	<boost/config.hpp>
+	<boost/mpl/bool.hpp>
+	<boost/mpl/integral_c.hpp>
+
+1096192465 /home/mmatos/Escritorio/pacman/include/boost/mpl/bool.hpp
+	<boost/mpl/bool_fwd.hpp>
+	<boost/mpl/integral_c_tag.hpp>
+	<boost/mpl/aux_/config/static_constant.hpp>
+
+1094139641 /home/mmatos/Escritorio/pacman/include/boost/mpl/bool_fwd.hpp
+	<boost/mpl/aux_/adl_barrier.hpp>
+
+1121745792 /home/mmatos/Escritorio/pacman/include/boost/mpl/integral_c.hpp
+	<boost/mpl/integral_c_fwd.hpp>
+	<boost/mpl/aux_/config/ctps.hpp>
+	<boost/mpl/aux_/config/static_constant.hpp>
+	<boost/mpl/aux_/config/workaround.hpp>
+	<boost/mpl/aux_/integral_wrapper.hpp>
+
+1096379818 /home/mmatos/Escritorio/pacman/include/boost/mpl/integral_c_fwd.hpp
+	<boost/mpl/aux_/config/workaround.hpp>
+	<boost/mpl/aux_/adl_barrier.hpp>
+
+1094139687 /home/mmatos/Escritorio/pacman/include/boost/type_traits/detail/bool_trait_undef.hpp
+
+1091596501 /home/mmatos/Escritorio/pacman/include/boost/throw_exception.hpp
+	<boost/config.hpp>
+	<exception>
+
+1116196840 /home/mmatos/Escritorio/pacman/include/boost/static_assert.hpp
+	<boost/config.hpp>
+	<boost/detail/workaround.hpp>
+
+1255808566 /home/mmatos/Escritorio/pacman/include/gliese/Rule.h
+	"Component.h"
+
+1255813556 /home/mmatos/Escritorio/pacman/include/gliese/PriorityComponentManager.h
+	"ComponentManager.h"
+	"hash_map"
+	"map"
+
+1257112894 /home/mmatos/Escritorio/pacman/include/gliese/GameSpace.h
+	"LogicObject.h"
+	"Rectangle.h"
+	"cassert"
+	"list"
+	"string"
+	"iostream"
+
+1257763162 /home/mmatos/Escritorio/pacman/include/gliese/GameSimulator.h
+	"Game.h"
+	"GameSpace.h"
+	"GameState.h"
+	"LogicObject.h"
+	"Rule.h"
+	"TranspositionTable.h"
+	"list"
+	"hash_map"
+
+1257486384 /home/mmatos/Escritorio/pacman/include/gliese/GameState.h
+	"Game.h"
+	"iostream"
+	"map"
+
+1257534170 /home/mmatos/Escritorio/pacman/include/gliese/TranspositionTable.h
+	"GameState.h"
+	"hash_map"
+	"list"
+
+1257605748 /home/mmatos/Escritorio/pacman/include/pacman/Pacman.h
+	"Action.h"
+	"PacmanSearch.h"
+	"iostream"
+	"list"
+	"string"
+
+1257609378 /home/mmatos/Escritorio/pacman/include/pacman/PacmanActions.h
+	"MoveAction.h"
+
+1255208744 /home/mmatos/Escritorio/pacman/include/gliese/MoveAction.h
+	"Action.h"
+	"iostream"
+
+1067763542 /home/mmatos/Escritorio/pacman/include/stlport/sstream
+	<stl/_prolog.h>
+	<stl/_sstream.h>
+	<wrap_std/sstream>
+	<stl/_epilog.h>
+
+1067763549 /home/mmatos/Escritorio/pacman/include/stlport/stl/_sstream.h
+	<stl/_streambuf.h>
+	<stl/_istream.h>
+	<stl/_string.h>
+	<stl/_sstream.c>
+
+1067763548 /home/mmatos/Escritorio/pacman/include/stlport/stl/_sstream.c
+	<stl/_sstream.h>
+
+1067763553 /home/mmatos/Escritorio/pacman/include/stlport/wrap_std/sstream
+	<using/sstream>
+
+1067763551 /home/mmatos/Escritorio/pacman/include/stlport/using/sstream
+
+1257764210 source:/home/mmatos/Escritorio/pacman/src/main.cpp
+	"PacmanMain.h"
+	"PacmanHeuristics.h"
+	"PacmanRTAPathfinder.h"
+	"fstream"
+
+1257582954 /home/mmatos/Escritorio/pacman/include/pacman/PacmanMain.h
+	"PacmanSearch.h"
+	"string"
+	"vector"
+
+1257764014 /home/mmatos/Escritorio/pacman/src/PacmanHeuristics.h
+	"PacmanSearch.h"
+
