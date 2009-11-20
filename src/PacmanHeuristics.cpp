@@ -6,6 +6,44 @@
 
 using namespace std;
 
+int distancia_manhattan(int x1, int x2, int y1, int y2)
+{
+    return abs(x1-x2) + abs(y1-y2);
+}
+
+int distancia_punto_mas_cercano(const LogicObject * pacman, const GameSpace & gs)
+{
+    int x = pacman->getShape()->getX();
+    int y = pacman->getShape()->getY();
+    int w = gs.getWidth();
+    int h = gs.getHeight();
+
+    list<const LogicObject *> puntos;
+    int min_dist = 1000;
+    int frontera = 2;
+    bool cubrio_espacio_total = false;
+    bool hay_puntos = false;
+    do {
+        int wi = max(0, x - frontera);
+        int hi = max(0, y - frontera);
+        int wf = min(w, x + frontera);
+        int hf = min(h, y + frontera);
+
+        gs.getObjects(Rectangle(wi, hi, wf - wi, hf - hi), DOT, puntos);
+        for (list<const LogicObject *>::const_iterator it = puntos.begin(); it != puntos.end(); it++) {
+            const Shape * s = (*it)->getShape();
+            min_dist = min(min_dist, distancia_manhattan(x, s->getX(), y, s->getY()));
+        }
+
+        hay_puntos = puntos.size() > 0;
+        cubrio_espacio_total = (x - frontera) <= 0 && (y - frontera) <= 0 &&
+                               (x + frontera) >= w && (y + frontera) >= h;
+        frontera *= 2;
+    } while (!hay_puntos && !cubrio_espacio_total);
+
+    return min_dist;
+}
+
 
 unsigned int h1(const Game * game)
 {
@@ -29,11 +67,6 @@ unsigned int h1(const Game * game)
     gs.getObjects(Rectangle(wi,hi,wf-wi,hf-hi), LogicObject::Type(ghostSubtype), ghosts);
     int cantidad = ghosts.size();
     return game->getVariables().getInteger(DOT_COUNT) + cantidad;
-}
-
-int distancia_manhattan(int x1, int x2, int y1, int y2)
-{
-    return abs(x1-x2) + abs(y1-y2);
 }
 
 unsigned int h2(const Game * game)
@@ -69,18 +102,11 @@ unsigned int h2(const Game * game)
         hi = 1;
         rw = w - wi;
         rh = h;
-    } else {
-        wi = 1;
-        hi = 1;
-        rw = w;
-        rh = h;
     }
-    set<string> dotSubtype;
-    dotSubtype.insert(DOT);
+
     list<const LogicObject *> dots;
-    cout << wi << "," << hi << "," << rw << "," << rh << endl;
     game->getGameSpace().getObjects(Rectangle(wi, hi, rw, rh),
-                                    LogicObject::Type(dotSubtype), dots);
+                                    DOT, dots);
 
     int d = 1000;
     for (list<const LogicObject *>::const_iterator it = dots.begin(); it != dots.end(); it++) {
@@ -89,7 +115,8 @@ unsigned int h2(const Game * game)
         d = min(d, distancia_manhattan(x, s->getX(), y, s->getY()));
     }
 
-	return game->getVariables().getInteger(DOT_COUNT) + d;
+    int en_dir = dots.size();
+	return game->getVariables().getInteger(DOT_COUNT) + 2*d;
 }
 
 unsigned int h3(const Game * game)
