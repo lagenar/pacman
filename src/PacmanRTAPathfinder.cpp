@@ -72,6 +72,8 @@ Action::Type PacmanRTAPathfinder::processCycle()
 		controlSim.setStateValue(visitedId, secondBestF + 1);
 	}
 
+    valores_heuristicas.push_back(secondBestF + 1);
+
 	controlSim.getPlayer()->performAction(bestAction);
 	controlSim.update();
 
@@ -80,6 +82,7 @@ Action::Type PacmanRTAPathfinder::processCycle()
 	if (isGameOver()) {
 		logSolution();
 		saveSolution();
+		guardarValoresHeuristicas();
 	} else if (getMode() == OFFLINE_SIMULATION_MODE) {
 		if (solution.size() % 50  == 0)
 			cout << ".\n";
@@ -280,4 +283,30 @@ void PacmanRTAPathfinder::saveSolution() const
 
 	// Configurar el nombre del archivo a reproducir como una variable global
 	setLastSolutionFilename(filename.str());
+}
+
+void PacmanRTAPathfinder::guardarValoresHeuristicas() const
+{
+
+	time_t rawtime;
+	struct tm * timeinfo;
+	time(&rawtime);
+	timeinfo = localtime(&rawtime);
+
+	stringstream filename, date;
+
+	date << timeinfo->tm_year + 1900 << format(timeinfo->tm_mon) << format(timeinfo->tm_mday);
+	date << '-';
+	date << format(timeinfo->tm_hour) << format(timeinfo->tm_min) << format(timeinfo->tm_sec);
+
+	filename << getHeuristEvaluationName() << '-' << getDepth() << '-' << date.str() << ".dat";
+
+	// Crear el archivo
+    ofstream file(filename.str().c_str(), ios::trunc);
+    int i =  1;
+    int s = valores_heuristicas.size();
+    for (std::list<unsigned>::const_iterator it = valores_heuristicas.begin(); it != valores_heuristicas.end(); it++, i++) {
+        file << i << '\t' << (s-i) + 1 << '\t' << (*it) << endl;
+    }
+    file.close();
 }

@@ -31,11 +31,15 @@ private:
 
 	void logSolution() const;
 	void saveSolution() const;
+	void guardarValoresHeuristicas() const;
 
 private:
 	GameSimulator controlSim;
 	std::list<Action::Type> solution;
 	Game * simulatedGame;
+
+	//Variables agregadas para obtener informacion
+	std::list<unsigned> valores_heuristicas;
 };
 
 
