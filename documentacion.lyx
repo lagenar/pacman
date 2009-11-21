@@ -42,8 +42,40 @@
 
 \begin_body
 
+\begin_layout Title
+Análisis y diseño del algoritmos II 
+\begin_inset Newline newline
+\end_inset
+
+Trabajo práctico especial
+\end_layout
+
 \begin_layout Standard
-Doc
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Introducción
+\end_layout
+
+\begin_layout Section
+Heurísticas
+\end_layout
+
+\begin_layout Section
+Conclusión
 \end_layout
 
 \end_body

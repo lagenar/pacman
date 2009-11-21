@@ -47,26 +47,28 @@ int distancia_punto_mas_cercano(const LogicObject * pacman, const GameSpace & gs
 
 unsigned int h1(const Game * game)
 {
-    // Reemplazar
-    const int margin = 4;
+    int frontera = 5;
     const GameSpace & gs = game->getGameSpace();
-    const int w = gs.getWidth();
-    const int h = gs.getHeight();
+    int w = gs.getWidth();
+    int h = gs.getHeight();
     const LogicObject * pacman = game->getObject(PACMAN);
     const Shape * shape = pacman->getShape();
-    const int x = shape->getX();
-    const int y = shape->getY();
+    int x = shape->getX();
+    int y = shape->getY();
     int hi, hf, wi, wf; //Extremos del rectangulo.
-    hi = max(0, y - margin); //Revisar el rango de la matriz.
-    hf = min(h - 1, y + margin);
-    wi = max(0, x - margin);
-    wf = min(w - 1, x + margin);
+    hi = max(0, y - frontera);
+    hf = min(h - 1, y + frontera);
+    wi = max(0, x - frontera);
+    wf = min(w - 1, x + frontera);
+
     set<string> ghostSubtype;
     ghostSubtype.insert(GHOST);
     list<const LogicObject *> ghosts;
     gs.getObjects(Rectangle(wi,hi,wf-wi,hf-hi), LogicObject::Type(ghostSubtype), ghosts);
-    int cantidad = ghosts.size();
-    return game->getVariables().getInteger(DOT_COUNT) + cantidad;
+    int cant_ghosts = ghosts.size();
+    int cant_puntos = game->getVariables().getInteger(DOT_COUNT);
+
+    return cant_puntos + cant_ghosts;
 }
 
 unsigned int h2(const Game * game)
