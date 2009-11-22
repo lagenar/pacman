@@ -1,6 +1,0 @@
-set xlabel "Número de ciclo"
-set ylabel "Costo"
-set term gif
-set output "heur.gif"
-plot "heur.dat" using 1:2 title 'Real', \
-     "heur.dat" using 1:3 title 'Heurística'
