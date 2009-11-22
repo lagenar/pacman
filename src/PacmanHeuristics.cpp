@@ -47,7 +47,7 @@ int distancia_punto_mas_cercano(const LogicObject * pacman, const GameSpace & gs
 
 unsigned int h1(const Game * game)
 {
-    int frontera = 5;
+    int frontera = 4;
     const GameSpace & gs = game->getGameSpace();
     int w = gs.getWidth();
     int h = gs.getHeight();

@@ -299,7 +299,7 @@ void PacmanRTAPathfinder::guardarValoresHeuristicas() const
 	date << '-';
 	date << format(timeinfo->tm_hour) << format(timeinfo->tm_min) << format(timeinfo->tm_sec);
 
-	filename << getHeuristEvaluationName() << '-' << getDepth() << '-' << date.str() << ".dat";
+	filename << getHeuristEvaluationName() << '-' << getDepth() << ".dat";
 
 	// Crear el archivo
     ofstream file(filename.str().c_str(), ios::trunc);
