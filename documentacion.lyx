@@ -70,6 +70,177 @@ LatexCommand tableofcontents
 Introducción
 \end_layout
 
+\begin_layout Standard
+En este informe se detalla sobre la implementación y análisis de funciones
+ heurísticas para la generación de soluciones subóptimas para un clon del
+ juego 
+\emph on
+Pacman
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+Los algoritmos 
+\emph on
+heurísticos 
+\emph default
+surgen de la necesidad de resolver problemas de complejidad alta(en algunos
+ casos indecidibles) para lograr acotar el tiempo de obtención de resultados.
+ En general, los resultados generados no son óptimos; éstos dependen directament
+e de la calidad de la heurística.
+ Las funciones heurísticas se valen de estimaciones con respecto a su entrada
+ para producir un resultado que se aproxime al valor óptimo.
+ Se diferencian de los algoritmos 
+\emph on
+aproximados 
+\emph default
+por el hecho de no saber con que precisión se acerca la solución generada
+ a la mejor.
+\end_layout
+
+\begin_layout Standard
+En este trabajo, las funciones heurísticas son utilizadas para estimar el
+ costo para que el 
+\emph on
+pacman 
+\emph default
+devore los puntos restantes del mapa, a partir de un estado arbitrario.
+ Hay diversas variables que pueden considerarse: cantidad de puntos restantes,
+ distancia a los fantasmas, distancia a puntos, etc.
+ También tiene incidencia en el resultado la importancia que se le de a
+ cada variable en una heurística.
+\end_layout
+
+\begin_layout Standard
+Las funciones 
+\emph on
+heurísticas estáticas
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+
+\emph on
+Se llama estática a una función heurística que tiene como parámetro sólo
+ la configuración de un estado.
+ 
+\end_layout
+
+\end_inset
+
+ 
+\emph default
+implementadas se usan en los algoritmos de búsqueda parcial
+\emph on
+ minimin 
+\emph default
+y 
+\emph on
+RTA* 
+\emph default
+para acotar el espacio de búsqueda generado, y en consecuencia, el tiempo
+ de ejecución.
+ Los algoritmos de búsqueda parcial introducen una variable más para analizar
+ las heurísticas, la profundidad del árbol de exploración generado en la
+ búsqueda.
+\end_layout
+
+\begin_layout Standard
+La implementación y el análisis de las funciones involucraron los siguientes
+ pasos:
+\end_layout
+
+\begin_layout Enumerate
+A partir de una hipótesis se implementa una función heurística.
+ Puede ser que surja a partir de una idea nueva o como una mejora a heurísticas
+ anteriores.
+\end_layout
+
+\begin_layout Enumerate
+Se hace un análisis empírico de la heurística.
+\end_layout
+
+\begin_layout Enumerate
+Se sacan conclusiones y se justifica el comportamiento del pacman.
+\end_layout
+
+\begin_layout Standard
+En el análisis empírico se tiene en cuenta:
+\end_layout
+
+\begin_layout Itemize
+El nivel de profundidad de la búsqueda.
+\end_layout
+
+\begin_layout Itemize
+El resultado de la ejecución(si ganó o perdió).
+\end_layout
+
+\begin_layout Itemize
+Cantidad de pasos de la solución.
+\end_layout
+
+\begin_layout Itemize
+Cantidad de puntos que quedaron sin comer.
+\end_layout
+
+\begin_layout Itemize
+La precisión de la heurística en la predicción, es decir, la diferencia
+ entre el valor real de la solución(determinado por el resultado final de
+ la ejecución) y el costo devuelto por la heurística en cada uno de los
+ pasos
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+La función de la solución real con respecto la cantidad de pasos siempre
+ será una lineal decreciente.
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Heuristica-ejemplo.gif
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Ejemplo de comparación entre la solución real y el valor devuelto por la
+ función heurística
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 Heurísticas
 \end_layout
