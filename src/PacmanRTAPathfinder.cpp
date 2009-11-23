@@ -214,7 +214,7 @@ void PacmanRTAPathfinder::pruneActions(const LogicObject * player, list<Action::
 	playerActions.remove(PacmanNoAction::NOACTION);
 }
 
-void PacmanRTAPathfinder::logSolution() const
+void PacmanRTAPathfinder::logSolution()
 {
 	cout << "\n\nDetalle de las acciones de la solucion obtenida:\n";
 
@@ -231,6 +231,8 @@ void PacmanRTAPathfinder::logSolution() const
 	} else {
 		cout << "\nResultado: Perdio\n";
 	}
+    Game * game = controlSim.getGame();
+	cout << "Puntos restantes: " << game->getVariables().getInteger(DOT_COUNT) << "\n";
 }
 
 string format(int n)

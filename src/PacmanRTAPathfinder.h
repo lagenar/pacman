@@ -29,7 +29,7 @@ private:
 
 	void pruneActions(const LogicObject * player, std::list<Action::Type> & playerActions);
 
-	void logSolution() const;
+	void logSolution();
 	void saveSolution() const;
 	void guardarValoresHeuristicas() const;
 

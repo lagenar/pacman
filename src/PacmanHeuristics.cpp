@@ -68,7 +68,7 @@ unsigned int h1(const Game * game)
     int cant_ghosts = ghosts.size();
     int cant_puntos = game->getVariables().getInteger(DOT_COUNT);
 
-    return cant_puntos + cant_ghosts;
+    return cant_puntos + frontera*cant_ghosts;
 }
 
 unsigned int h2(const Game * game)
