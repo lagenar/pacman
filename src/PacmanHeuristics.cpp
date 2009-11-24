@@ -74,51 +74,15 @@ unsigned int h1(const Game * game)
 unsigned int h2(const Game * game)
 {
     const LogicObject * pacman = game->getObject(PACMAN);
-    const Shape * shape = pacman->getShape();
-    int x = shape->getX();
-    int y = shape->getY();
     const GameSpace & gs = game->getGameSpace();
-    const int w = gs.getWidth();
-    const int h = gs.getHeight();
 
-    Direction dir;
-    pacman->getAttribute(DIRECTION, dir);
-    int wi, hi, rw, rh;
-    if (dir == DOWN) {
-        wi = 1;
-        hi = y + 1;
-        rw = w;
-        rh = h-hi;
-    } else if (dir == UP) {
-        wi = 1;
-        hi = 1;
-        rw = w;
-        rh = y-1;
-    } else if (dir == LEFT) {
-        wi = 1;
-        hi = 1;
-        rw = x - 1;
-        rh = h;
-    } else if (dir == RIGHT) {
-        wi = x + 1;
-        hi = 1;
-        rw = w - wi;
-        rh = h;
-    }
+	int cant_puntos = game->getVariables().getInteger(DOT_COUNT);
+	int dist_cercano = distancia_punto_mas_cercano(pacman, gs);
 
-    list<const LogicObject *> dots;
-    game->getGameSpace().getObjects(Rectangle(wi, hi, rw, rh),
-                                    DOT, dots);
-
-    int d = 1000;
-    for (list<const LogicObject *>::const_iterator it = dots.begin(); it != dots.end(); it++) {
-        const Shape * s = (*it)->getShape();
-
-        d = min(d, distancia_manhattan(x, s->getX(), y, s->getY()));
-    }
-
-    int en_dir = dots.size();
-	return game->getVariables().getInteger(DOT_COUNT) + 2*d;
+    cout << dist_cercano << endl;
+    if (cant_puntos > 30)
+        return cant_puntos + dist_cercano;
+    return cant_puntos;
 }
 
 unsigned int h3(const Game * game)

@@ -16,6 +16,7 @@
 \font_tt_scale 100
 
 \graphics default
+\float_placement h
 \paperfontsize default
 \spacing single
 \use_hyperref false
@@ -259,7 +260,7 @@ Una forma de obtener una cota inferior de la cantidad de pasos faltantes
  para que el pacman gane el juego es considerar la cantidad de puntos sin
  comer en el estado de entrada
 \begin_inset Foot
-status open
+status collapsed
 
 \begin_layout Plain Layout
 Ésta es la heurística de ejemplo provista por la cátedra
@@ -269,7 +270,7 @@ status open
 
 .
  El problema que surge con ésta estimación simple es que no se considera
- en ningun grado la incidencia de los fantasmas, lo que produce que el pacman
+ en ningún grado la incidencia de los fantasmas, lo que produce que el pacman
  termine encerrado por ellos en la mayoría de los casos.
  
 \end_layout
@@ -278,7 +279,7 @@ status open
 \begin_inset Float table
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Tabular
@@ -497,13 +498,71 @@ Resultados para la heurística que sólo tiene en cuenta los puntos
 
 \end_layout
 
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Esta heurística considera la cantidad de fantasmas cercanos al pacman.
+ Se introduce un parámetro denominado 
+\emph on
+frontera 
+\emph default
+que determina la cantidad límite de pasos en todas las direcciones a la
+ que debe estar un fantasma para que se considere cercano al pacman.
+ Mientras más fantasmas se encuentren en la zona fronteriza mayor será el
+ costo agregado.
+ El objetivo de este costo es evitar que el pacman caiga en situaciones
+ en las cuales pueda llegar a ser acorralado.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
 \begin_layout Plain Layout
+\begin_inset Graphics
+	filename frontera.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Estado de juego con un fantasma en la frontera
+\end_layout
+
+\end_inset
+
 
 \end_layout
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+Para obtener buenos resultados se debe elegir una frontera
+\emph on
+ 
+\emph default
+adecueada, ya que si es demasiado grande no tendrá incidencia en el resultado
+ y si es muy chica la evalución heurística agregará un costo sólo cuando
+ le queden pocas chances de sobrevivir.
+\end_layout
+
+\begin_layout Standard
+Además del costo correspondiente a los fantasmas se agrega el costo de la
+ cantidad de puntos restantes, que permite que el pacman se acerque a la
+ solución.
 \end_layout
 
 \begin_layout Section
