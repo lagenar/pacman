@@ -1932,13 +1932,33 @@ La relación de dependencia entre las variables establecida en la implementació
  rápida.
 \end_layout
 
+\begin_layout Itemize
+Como se observa en el gráfico de la figura 4 se mejoró la precisión de la
+ estimación de la heurística con respecto a la primera heurística, los picos
+ que se ven en el tramo final del gráfico son generados principalmente por
+ el costo agregado de la distancia al punto más cercano cuando se terminan
+ de comer todos los puntos de una sección.
+\end_layout
+
 \begin_layout Standard
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
+\begin_inset space \qquad{}
+\end_inset
+
+
+\begin_inset space \qquad{}
+\end_inset
+
+
+\begin_inset space \qquad{}
+\end_inset
+
+
 \begin_inset Graphics
 	filename varado.png
 	scale 40
@@ -1963,6 +1983,28 @@ El pacman en prefiriendo conservar distancias
 \end_inset
 
 
+\end_layout
+
+\begin_layout Subsection
+Heurística 3
+\end_layout
+
+\begin_layout Subsubsection*
+Idea e hipótesis
+\end_layout
+
+\begin_layout Standard
+Esta heurística surge a partir de la combinación de las primeras dos heurísticas
+ y de la interpretación de los resultados de las heurísticas anteriores
+ para mejorar la calidad de la solución.
+\end_layout
+
+\begin_layout Subsubsection*
+Implementación
+\end_layout
+
+\begin_layout Subsubsection*
+Resultados empiricos e interpretación
 \end_layout
 
 \end_body
