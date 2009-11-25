@@ -187,6 +187,10 @@ Cantidad de puntos que quedaron sin comer.
 \end_layout
 
 \begin_layout Itemize
+Espacio de búsqueda total.
+\end_layout
+
+\begin_layout Itemize
 La precisión de la heurística en la predicción, es decir, la diferencia
  entre el valor real de la solución(determinado por el resultado final de
  la ejecución) y el costo devuelto por la heurística en cada uno de los
@@ -554,8 +558,8 @@ Para obtener buenos resultados se debe elegir una frontera
 \emph on
  
 \emph default
-adecueada, ya que si es demasiado grande no tendrá incidencia en el resultado
- y si es muy chica la evalución heurística agregará un costo sólo cuando
+adecuada, ya que si es demasiado grande no tendrá incidencia en el resultado
+ y si es muy chica la evaluación heurística agregará un costo sólo cuando
  le queden pocas chances de sobrevivir.
 \end_layout
 
@@ -565,8 +569,576 @@ Además del costo correspondiente a los fantasmas se agrega el costo de la
  solución.
 \end_layout
 
-\begin_layout Section
-Conclusión
+\begin_layout Standard
+Esta función considera el peso de los fantasmas y de los puntos restantes
+ en forma independiente, teniendo la consecuencia que en algunos estados
+ una variable tendrá más peso que la otra y viceversa.
+ Por ejemplo, cuando restan pocos puntos por comer, el peso de los fantasmas
+ incide en mayor grado que al comienzo del juego.
+ Este comportamiento puede ser indeseado en algunas instancias del juego
+ cuando se prueba con niveles de profundidad bajos.
+\end_layout
+
+\begin_layout Standard
+En esta heurística no se tienen en cuenta el comportamiento de los fantasmas,
+ por ejemplo, si los fantasmas estan en modo asustadizo, su dirección con
+ respecto al pacman y la identidad de cada fantasma cercano.
+ En consecuencia, puede que ciertos estados se evaluen como más hostiles
+ para el pacman de lo que realmente son.
+\end_layout
+
+\begin_layout Subsubsection*
+Implementación
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+unsigned int h1(const Game * game) 
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+{     
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+
+\size footnotesize
+int frontera = 4; //valor de frontera    
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+const GameSpace & gs = game->getGameSpace();
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+int w = gs.getWidth(); 
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+int h = gs.getHeight(); 
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+const LogicObject * pacman = game->getObject(PACMAN); 
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+const Shape * shape = pacman->getShape();    
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+int x = shape->getX();    
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+int y = shape->getY();    
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+int hi, hf, wi, wf; //Extremos del rectangulo.
+   
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+hi = max(0, y - frontera);   
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+hf = min(h - 1, y + frontera);   
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+wi = max(0, x - frontera);   
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+wf = min(w - 1, x + frontera);
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+set<string> ghostSubtype;
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+ghostSubtype.insert(GHOST);  
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+list<const LogicObject *> ghosts;   
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+gs.getObjects(Rectangle(wi,hi,wf-wi,hf-hi), 
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+              LogicObject::Type(ghostSubtype), ghosts);  
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+int cant_ghosts = ghosts.size();  
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+int cant_puntos = game->getVariables().getInteger(DOT_COUNT);
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+return cant_puntos + frontera*cant_ghosts;
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+
+\size footnotesize
+}
+\end_layout
+
+\begin_layout Standard
+Se eligió el tamaño de la frontera de considerando que tan cerca tendría
+ que estar un fantasma para ser hostil.
+ 
+\end_layout
+
+\begin_layout Standard
+Como puede observarse en el código, cuando desde la posición del pacman
+ hacia una dirección la extensión de la frontera queda fuera del espacio
+ de juego, simplemente se toma el extremo del mapa como extremo del rectángulo
+ a extraer.
+\end_layout
+
+\begin_layout Standard
+El costo asociado al estado es una combinación lineal entre la cantidad
+ de puntos del mapa y la cantidad de fantasmas del rectángulo extraído.
+ Para dar un mayor peso a los fantasmas se lo multiplica por la frontera,
+ esto puede interpretarse como la cantidad de pasos que requiere el pacman
+ para escapar de una situación comprometida(a mayor cantidad de fantasmas,
+ mayor es el costo).
+\end_layout
+
+\begin_layout Subsubsection*
+Resultados empíricos e interpretación
+\end_layout
+
+\begin_layout Standard
+La función se probó en cuatro niveles de profundidad.
+ En la elección de los niveles influyeron las dos variables de la heurística.
+ En niveles de profundidad bajos el pacman tiene una menor amplitud en cuanto
+ al alcance de sus acciones.
+ Si en un estado quedan pocos puntos y el pacman está alejado de estos,
+ los estados que se deriven con la aplicación del minimin probablemente
+ no obtendrán mejoras en el costo con respecto a la variable que considera
+ los puntos restantes, porque el pacman no llegará a comer ningún punto.
+ También es interesante observar el comportamiento de la componente del
+ costo de los fantasmas en niveles bajos, porque se tiene menor capacidad
+ para prever situaciones de riesgo.
+\end_layout
+
+\begin_layout Standard
+Por otra parte, en niveles de profundidad altos, el pacman puede prever
+ estados en los que se encuentra en cualquier parte del mapa, lo que permitiría
+ que sea posible obtener costos de heurísticas menores con respecto a la
+ variable de los puntos.
+ En forma similar ocurre con el costo asociado a los fantasmas.
+\end_layout
+
+\begin_layout Standard
+Se eligieron dos niveles bajos(6 y 10) y dos moderadamente altos(20 y 30).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="5">
+<features>
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Nivel
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Resultado
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Pasos
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Puntos restantes
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Estados evaluados
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Perdió
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+76
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+173
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1345
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Ganó
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+564
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+22245
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+20
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Ganó
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+481
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+73868
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+30
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Ganó
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+458
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+267781
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Resultados de la heurística 1
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Heuristica1-30.gif
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Gráfico que muestra la precisión de estimación de la heurística en nivel
+ 30
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La tabla 2 muestra que salvo en el nivel 6, los resultados de las soluciones
+ fueron consistentes.
+ En general, las hipótesis se cumplieron, pero hubo algunos patrones en
+ el comportamiento para destacar:
+\end_layout
+
+\begin_layout Itemize
+Cuando quedan pocos puntos el pacman tiende a hacer movimientos redundantes
+ que no mejoran el estado de la solución en forma significativa, esto se
+ debe a que el peso de los fantasmas es superior que al de los puntos en
+ los estados finales del juego.
+ Puede observarse en el gráfico de la figura 3 que al final se sobre estima
+ el costo de la solución y a medida que se comen más puntos la función del
+ costo va entrando en una meseta.
+\end_layout
+
+\begin_layout Itemize
+Hay situaciones en las que el pacman deja puntos aislados y se dirige a
+ una zona donde hay más puntos.
+ Este comportamiento es más marcado cuando se prueba con niveles elevados.
+ Interpretamos que ocurre porque la heurística evalúa que es mejor ir directamen
+te a comer en la zona donde hay más puntos que volver unos pocos pasos atrás,
+ comer los puntos aislados y luego ir a la zona densa, esto pasa porque
+ en la heurística no hay ningún costo asociado al de volver a comer los
+ puntos aislados.
+ En la mayoría de los casos, el dejar puntos aislados hace que la cantidad
+ de pasos de la solución sea mayor.
+\end_layout
+
+\begin_layout Itemize
+En niveles altos el pacman tiende a pasar cerca de los fantasmas con mayor
+ frecuencia.
+ Como se tiene mayor visión, en una evaluación heurística ganadora(de costo
+ mínimo) puede que el pacman pase cerca de los fantasmas en estados intermedios
+ porque se sabe que al final no terminará en una posición hostil.
+\end_layout
+
+\begin_layout Itemize
+Como se predijo, el pacman no aprovecha posibles ventajas que pueda sacar
+ en el modo asustadizo.
 \end_layout
 
 \end_body

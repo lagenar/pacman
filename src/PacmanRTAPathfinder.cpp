@@ -18,6 +18,7 @@ const unsigned int LOSE_VALUE = MAX_F - 1;
 PacmanRTAPathfinder::PacmanRTAPathfinder()
 {
 	simulatedGame = 0;
+	estados_evaluados = 0;
 }
 
 PacmanRTAPathfinder::PacmanRTAPathfinder(Game * newGame)
@@ -29,6 +30,7 @@ PacmanRTAPathfinder::PacmanRTAPathfinder(Game * newGame)
 	controlSim.setPlayer(simulatedGame->getObject(PACMAN));
 
 	controlSim.addVisited(controlSim.getCurrentState());
+	estados_evaluados = 0;
 }
 
 PacmanRTAPathfinder::~PacmanRTAPathfinder()
@@ -143,6 +145,7 @@ Action::Type PacmanRTAPathfinder::getAction(unsigned int depth, unsigned int & b
 unsigned int PacmanRTAPathfinder::minimin(GameSimulator & planSim, unsigned int depth, unsigned int g)
 {
 	assert(h != 0);
+    estados_evaluados++;
 
 	if (planSim.isGameOver()) {
 		if (planSim.getGameOverResult() == GameSimulator::WIN) {
@@ -233,6 +236,7 @@ void PacmanRTAPathfinder::logSolution()
 	}
     Game * game = controlSim.getGame();
 	cout << "Puntos restantes: " << game->getVariables().getInteger(DOT_COUNT) << "\n";
+	cout << "Cantidad de estados evaluados: " << estados_evaluados << "\n";
 }
 
 string format(int n)

@@ -40,6 +40,7 @@ private:
 
 	//Variables agregadas para obtener informacion
 	std::list<unsigned> valores_heuristicas;
+	unsigned estados_evaluados;
 };
 
 
