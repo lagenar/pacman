@@ -79,7 +79,6 @@ unsigned int h2(const Game * game)
 	int cant_puntos = game->getVariables().getInteger(DOT_COUNT);
 	int dist_cercano = distancia_punto_mas_cercano(pacman, gs);
 
-    cout << "Mas cercano: " << dist_cercano << " Puntos: " << cant_puntos << endl;
     if (cant_puntos <= dist_cercano)
         return cant_puntos;
     return cant_puntos + dist_cercano;

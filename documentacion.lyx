@@ -1175,8 +1175,8 @@ Además de la obtención de un costo que tenga una mayor correspondencia al
 A diferencia de la heurística 1, se plantea una relación de dependencia
  entre las variables consideradas por la heurística, es decir, el resultado
  de la función estará compuesto en forma distinta, de acuerdo si se cumple
- o no cierta relación cierta relación entre la cantidad de puntos y la distancia
- al punto más cercano.
+ o no cierta relación entre la cantidad de puntos y la distancia al punto
+ más cercano.
  Esta dependencia surge de la hipótesis de que si el costo fuera un valor
  en donde las variables son independientes, en los estados donde quedan
  pocos puntos la distancia al punto más cercano conformaría la mayor parte
@@ -1229,7 +1229,329 @@ Para implementar la heurística se tuvo que ver como medir las distancias
 \begin_inset Formula $|x_{1}-x_{2}|+|y_{1}-y_{2}|$
 \end_inset
 
-, tomamos esta última para la heurística porque
+, tomamos esta última para la heurística porque en el mapa no hay caminos
+ en diagonal, lo que la hace más precisa.
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+int distancia_manhattan(int x1, int x2, int y1, int y2)
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+{     
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+
+\size footnotesize
+return abs(x1-x2) + abs(y1-y2);
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+
+\size footnotesize
+}
+\end_layout
+
+\begin_layout Standard
+Para obtener la distancia al punto más cercano se implementó una función,
+ distancia_punto_mas_cercano, que extrae rectángulos que tienen al pacman
+ como centro hasta encontrar un punto en esa área.
+ El área del rectángulo a considerar se va duplicando en cada iteración.
+ Está función invoca a la función distancia_manhattan para encontrar la
+ menor distancia.
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+int distancia_punto_mas_cercano(const LogicObject * pacman, const GameSpace
+ & gs)
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+{     
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+
+\size footnotesize
+int x = pacman->getShape()->getX();     
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+int y = pacman->getShape()->getY();     
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+int w = gs.getWidth();     
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+int h = gs.getHeight();
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+list<const LogicObject *> puntos; 
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+int min_dist = 1000;     
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+int frontera = 2;     
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+bool cubrio_espacio_total = false;     
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+bool hay_puntos = false;     
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+do {         
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+
+\size footnotesize
+int wi = max(0, x - frontera);         
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+int hi = max(0, y - frontera);         
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+int wf = min(w, x + frontera);         
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+int hf = min(h, y + frontera);
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+gs.getObjects(Rectangle(wi, hi, wf - wi, hf - hi), DOT, puntos);        
+ 
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+for (list<const LogicObject *>::const_iterator it = puntos.begin();
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+     it != puntos.end(); it++) {             
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+
+\size footnotesize
+const Shape * s = (*it)->getShape();             
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+min_dist = min(min_dist, distancia_manhattan(x, s->getX(), y, s->getY()));
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+
+\size footnotesize
+}
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+hay_puntos = puntos.size() > 0;         
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+cubrio_espacio_total = (x - frontera) <= 0 && (y - frontera) <= 0 &&   
+                                        
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+                       (x + frontera) >= w && (y + frontera) >= h;     
+    
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+frontera *= 2;    
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+
+\size footnotesize
+} while (!hay_puntos && !cubrio_espacio_total);
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+return min_dist;
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+
+\size footnotesize
+}
+\end_layout
+
+\begin_layout Standard
+El codigo de la heurística 2 es:
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+unsigned int h2(const Game * game) 
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+{     
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+
+\size footnotesize
+const LogicObject * pacman = game->getObject(PACMAN);     
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+const GameSpace & gs = game->getGameSpace();
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+int cant_puntos = game->getVariables().getInteger(DOT_COUNT); 	
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+int dist_cercano = distancia_punto_mas_cercano(pacman, gs);
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+if (cant_puntos <= dist_cercano)         
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+
+\size footnotesize
+return cant_puntos;     
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+
+\size footnotesize
+return cant_puntos + dist_cercano;
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+
+\size footnotesize
+}
+\end_layout
+
+\begin_layout Standard
+Aquí puede observarse la relación entre las dos variables que se remarcó
+ en la sección anterior.
+ El propósito es que cuando quedan pocos puntos(menos que la distancia al
+ más cercano) sólo se considera esta cantidad, evitando que el pacman no
+ coma los pocos puntos restantes.
+\end_layout
+
+\begin_layout Standard
+La complejidad de la función heurística se determina considerando la complejidad
+ de la función distancia_punto_mas_cercano, que depende del ancho y el largo
+ del mapa.
+ Calculamos la complejidad para un mapa genérico.
+ El peor de los casos ocurre cuando el punto más cercano se encuentra a
+ distancia máxima del pacman.
+ En este caso se deberá revisar sobre todos los rectángulos incrementalmente,
+ hasta que se extrae el mayor rectángulo que abarca todo el mapa.
+ Como se debe iterar sobre todo el rectángulo para encontrar el punto más
+ cercano y esta es la operación más costosa, la complejidad del algoritmo
+ es de 
+\begin_inset Formula $O\left(w*h\right)$
+\end_inset
+
+, siendo 
+\begin_inset Formula $w$
+\end_inset
+
+ y 
+\begin_inset Formula $h$
+\end_inset
+
+ la el ancho y el largo del mapa respectivamente.
 \end_layout
 
 \end_body
