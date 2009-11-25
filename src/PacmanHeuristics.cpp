@@ -86,31 +86,30 @@ unsigned int h2(const Game * game)
 
 unsigned int h3(const Game * game)
 {
-    // Reemplazar
+    int frontera = 4;
+    const GameSpace & gs = game->getGameSpace();
+    int w = gs.getWidth();
+    int h = gs.getHeight();
     const LogicObject * pacman = game->getObject(PACMAN);
     const Shape * shape = pacman->getShape();
-    const int x = shape->getX();
-    const int y = shape->getY();
-    const GameSpace & gs = game->getGameSpace();
-    const int w = gs.getWidth();
-    const int h = gs.getHeight();
+    int x = shape->getX();
+    int y = shape->getY();
+    int hi, hf, wi, wf; //Extremos del rectangulo.
+    hi = max(0, y - frontera);
+    hf = min(h - 1, y + frontera);
+    wi = max(0, x - frontera);
+    wf = min(w - 1, x + frontera);
+    set<string> ghostSubtype;
+    ghostSubtype.insert(GHOST);
     list<const LogicObject *> ghosts;
-    ghosts.push_back(game->getObject(INKY));
-    ghosts.push_back(game->getObject(PINKY));
-    ghosts.push_back(game->getObject(BLINKY));
-    ghosts.push_back(game->getObject(CLYDE));
-    int costo = game->getVariables().getInteger(DOT_COUNT);
-    list<const LogicObject *>::const_iterator it;
-    for(it = ghosts.begin(); it != ghosts.end(); it++)
-    {
-        const Shape * shape = (*it)->getShape();
-        int posx = shape->getX();
-        int posy = shape->getY();
-        int d = abs(posx-x) + abs(posy-y);
-        double f = (1.0/float(d)) * 100;
-        costo+=f;
-    }
-    return costo;
+    gs.getObjects(Rectangle(wi,hi,wf-wi,hf-hi), LogicObject::Type(ghostSubtype), ghosts);
+    int cant_ghosts = ghosts.size();
+    int cant_puntos = game->getVariables().getInteger(DOT_COUNT);
+	int dist_cercano = distancia_punto_mas_cercano(pacman, gs);
+
+    if (cant_puntos <= dist_cercano)
+        return cant_puntos + cant_ghosts * frontera;
+    return cant_puntos + cant_ghosts * frontera + dist_cercano;
 }
 
 unsigned int h4(const Game * game)
