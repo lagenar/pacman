@@ -1551,7 +1551,15 @@ La complejidad de la función heurística se determina considerando la complejid
 \begin_inset Formula $h$
 \end_inset
 
- la el ancho y el largo del mapa respectivamente.
+ el ancho y el largo del mapa respectivamente.
+\end_layout
+
+\begin_layout Subsubsection*
+Resultados empíricos e implementación
+\end_layout
+
+\begin_layout Standard
+
 \end_layout
 
 \end_body
