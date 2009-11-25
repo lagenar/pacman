@@ -1108,7 +1108,7 @@ La tabla 2 muestra que salvo en el nivel 6, los resultados de las soluciones
 \begin_layout Itemize
 Cuando quedan pocos puntos el pacman tiende a hacer movimientos redundantes
  que no mejoran el estado de la solución en forma significativa, esto se
- debe a que el peso de los fantasmas es superior que al de los puntos en
+ debe a que el peso de los fantasmas es superior que el de los puntos en
  los estados finales del juego.
  Puede observarse en el gráfico de la figura 3 que al final se sobre estima
  el costo de la solución y a medida que se comen más puntos la función del
@@ -1139,6 +1139,97 @@ En niveles altos el pacman tiende a pasar cerca de los fantasmas con mayor
 \begin_layout Itemize
 Como se predijo, el pacman no aprovecha posibles ventajas que pueda sacar
  en el modo asustadizo.
+\end_layout
+
+\begin_layout Subsection
+Heurística 2
+\end_layout
+
+\begin_layout Subsubsection*
+Idea e hipótesis
+\end_layout
+
+\begin_layout Standard
+En esta heurística se intenta aproximar el costo de la solución considerando
+ la distancia al punto más cercano del pacman en el estado de juego.
+ Este costo asociado puede pensarse como la cantidad de pasos que debería
+ hacer el pacman para encontrarse con un punto.
+ A su vez, la cantidad de puntos restantes se toma como una variable importante
+ para que el pacman se acerque a la solución y de esta forma evitar ciertas
+ acciones indeseadas que se pueden generar cuando sólo se tiene en cuenta
+ la distancia a los puntos.
+\end_layout
+
+\begin_layout Standard
+Además de la obtención de un costo que tenga una mayor correspondencia al
+ costo real en comparación a sólo considerar la cantidad de puntos, esta
+ función tiene el propósito derivado de hacer que el pacman logre comer
+ los puntos en una forma más eficiente, es decir, que recorra la menor cantidad
+ de espacios en blanco(sin puntos) posible.
+ La situación ideal(aunque poco factible) sería que el pacman coma los puntos
+ en forma continua siempre estando a sólo un movimiento del próximo punto
+ a comer.
+\end_layout
+
+\begin_layout Standard
+A diferencia de la heurística 1, se plantea una relación de dependencia
+ entre las variables consideradas por la heurística, es decir, el resultado
+ de la función estará compuesto en forma distinta, de acuerdo si se cumple
+ o no cierta relación cierta relación entre la cantidad de puntos y la distancia
+ al punto más cercano.
+ Esta dependencia surge de la hipótesis de que si el costo fuera un valor
+ en donde las variables son independientes, en los estados donde quedan
+ pocos puntos la distancia al punto más cercano conformaría la mayor parte
+ de este, haciendo que el pacman no coma puntos en situaciones en las que
+ comer puntos dejaría al punto más cercano en una posición alejada.
+ En la situación anterior el pacman dependería de que los fantasmas lo 
+\begin_inset Quotes eld
+\end_inset
+
+obliguen
+\begin_inset Quotes erd
+\end_inset
+
+ a comer los puntos persiguiéndolo.
+ Está relación se detallará en la sección de implementación.
+\end_layout
+
+\begin_layout Standard
+Al no considerar a los fantasmas en el costo, puede que se necesiten niveles
+ altos para que logre llegar a una solución.
+ Esta omisión puede que tenga como consecuencia que los resultados no tengan
+ la misma consistencia que en la heurística 1, ya que no se tienen elementos(a
+ excepción de la exploración del algoritmo de búsqueda) que permitan detectar
+ estados hostiles.
+ Por esta razón pensamos que el nivel de profundidad tendrá una mayor incidencia
+ para la supervivencia del pacman.
+ Tampoco se saca ventaja del modo asustadizo.
+ 
+\end_layout
+
+\begin_layout Subsubsection*
+Implementación
+\end_layout
+
+\begin_layout Standard
+Para implementar la heurística se tuvo que ver como medir las distancias
+ a los puntos.
+ Se consideraron dos formas de medir distancias: la distancia euclídea y
+ la de Manhattan.
+ Sean 
+\begin_inset Formula $\left(x_{1},y_{1}\right)$
+\end_inset
+
+ y 
+\begin_inset Formula $\left(x_{2},y_{2}\right)$
+\end_inset
+
+ las coordenadas de dos objetos, la distancia de Manhattan entre esos dos
+ puntos se define como 
+\begin_inset Formula $|x_{1}-x_{2}|+|y_{1}-y_{2}|$
+\end_inset
+
+, tomamos esta última para la heurística porque
 \end_layout
 
 \end_body
