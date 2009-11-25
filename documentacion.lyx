@@ -1137,6 +1137,11 @@ En niveles altos el pacman tiende a pasar cerca de los fantasmas con mayor
 \end_layout
 
 \begin_layout Itemize
+La heurística no tiene en cuenta las paredes, lo que lleva que el pacman
+ tome desiciones desacertadas.
+\end_layout
+
+\begin_layout Itemize
 Como se predijo, el pacman no aprovecha posibles ventajas que pueda sacar
  en el modo asustadizo.
 \end_layout
@@ -1555,10 +1560,408 @@ La complejidad de la función heurística se determina considerando la complejid
 \end_layout
 
 \begin_layout Subsubsection*
-Resultados empíricos e implementación
+Resultados empíricos e interpretación
 \end_layout
 
 \begin_layout Standard
+Se probó esta heurística considerando que en niveles bajos el hecho de conocer
+ cuando el pacman esta cerca de un punto puede hacer que la deficiencia
+ de la poca expansión en el algoritmo de búsqueda no sea tan evidente.
+ Aunque en los niveles bajos, se presenta la desventaja de tener poca informació
+n sobre la posición de los fantasmas con respecto al pacman.
+\end_layout
+
+\begin_layout Standard
+En niveles de profundidad elevados, puede que el ajuste mediante la dependencia
+ lineal cuando quedan pocos puntos favorezca al pacman, ya que al tener
+ una extensión de búsqueda mayor y sólo considerar la cantidad de puntos,
+ se puede encontrar una solución efectiva en el último tramo.
+\end_layout
+
+\begin_layout Standard
+La heurística se probo con cuatro niveles de profundidad.
+ Los niveles 10, 20, y 30 se tomaron para comparar los resultados con otras
+ heurísticas.
+ Se probó en nivel 35 para observar si se obtienen mejoras a partir de las
+ observaciones anteriormente mencionadas.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="5">
+<features>
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Nivel
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Resultado
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Pasos
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Puntos restantes
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Estados evaluados
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Perdió
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+323
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+68
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+11188
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+20
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Ganó
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+498
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+74814
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+30
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Ganó
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+567
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+302372
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+35
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Ganó
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+471
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+412414
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Resultados de la heurística 3
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Heuristica2-35.gif
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Gráfico de precisión de la heurística 2 en nivel 35
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Viendo los resultados y el comportamiento obtuvimos las siguientes conclusiones:
+\end_layout
+
+\begin_layout Itemize
+En el nivel de profundidad 10 el pacman es acorralado, esto concuerda con
+ la hipótesis para niveles bajos.
+ El factor de la distancia hizo que se acercara a puntos a los que no hubiese
+ llegado sin considerar este factor.
+\end_layout
+
+\begin_layout Itemize
+Una situación imprevista en todos los niveles fue que en algunos lugares
+ el pacman se queda parado(NoAction) o tiene un comportamiento ciclico(hace
+ un movimiento en una dirección y después otro en la dirección opuesta).
+ Este comportamiento se debe a que el costo asociado a la distancia del
+ punto más cercano luego de comer los puntos de una zona es mayor que el
+ beneficio de comer los puntos.
+ Debido a esto, cuando el pacman se encuentra en esas posiciones de equilibrio,
+ sólo se mueve hacia los puntos cuando comienza a ser perseguido por los
+ fantasmas.
+\end_layout
+
+\begin_layout Itemize
+La relación de dependencia entre las variables establecida en la implementación
+ funciona bien en los niveles altos, cuando se da que las distancias a los
+ puntos más cercanos son mayores a la cantidad de puntos total, se comienza
+ a considerar exclusivamente la cantidad de puntos lo que lleva a una solución
+ rápida.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename varado.png
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+El pacman en prefiriendo conservar distancias
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
 
 \end_layout
 
