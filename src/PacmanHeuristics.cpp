@@ -114,7 +114,28 @@ unsigned int h3(const Game * game)
 
 unsigned int h4(const Game * game)
 {
-    // Reemplazar
+    set<string> ghostSubtype;
+    ghostSubtype.insert(GHOST);
+    list<const LogicObject *> ghosts;
+    game->getObjects(ghostSubtype, ghosts);
+    bool asustadizo =  game->getVariables().getBoolean(SCATTERED_MODE);
+    const LogicObject * pacman = game->getObject(PACMAN);
+    list<const LogicObject *>::iterator it = ghosts.begin();
+    int min_dist = 1000;
+    const LogicObject * mas_cercano = NULL;
+    int x_pac = pacman->getShape()->getX();
+    int y_pac = pacman->getShape()->getY();
+    while (it != ghosts.end())
+    {
+        int x = (*it)->getShape()->getX();
+        int y = (*it)->getShape()->getY();
+        if (distancia_manhattan(x_pac,y_pac,x,y) < min_dist)
+        {
+            min_dist = distancia_manhattan(x_pac,y_pac,x,y);
+            mas_cercano = (*it);
+        }
+        it++;
+    }
 	return game->getVariables().getInteger(DOT_COUNT);
 }
 
