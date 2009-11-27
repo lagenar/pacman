@@ -39,7 +39,7 @@ int distancia_punto_mas_cercano(const LogicObject * pacman, const GameSpace & gs
         gs.getObjects(Rectangle(wi, hi, wf - wi, hf - hi), DOT, puntos);
         for (list<const LogicObject *>::const_iterator it = puntos.begin(); it != puntos.end(); it++) {
             const Shape * s = (*it)->getShape();
-            min_dist = min(min_dist, distancia_euclidiana(x, s->getX(), y, s->getY()));
+            min_dist = min(min_dist, distancia_manhattan(x, s->getX(), y, s->getY()));
         }
 
         hay_puntos = puntos.size() > 0;
