@@ -147,7 +147,22 @@ unsigned int h5(const Game * game)
 
 unsigned int h6(const Game * game)
 {
-    // Reemplazar
-	return game->getVariables().getInteger(DOT_COUNT);
+    const LogicObject * pacman = game->getObject(PACMAN);
+    int pac_x = pacman->getShape()->getX();
+    int pac_y = pacman->getShape()->getY();
+    //bool asustadizo = game->getVariables().getBoolean(SCATTERED_MODE);
+	int cant_puntos = game->getVariables().getInteger(DOT_COUNT);
+    int dist_fantasmas = 0;
+    const LogicObject * clyde = game->getObject(CLYDE);
+    const LogicObject * inky = game->getObject(INKY);
+    const LogicObject * pinky = game->getObject(PINKY);
+    const LogicObject * blinky = game->getObject(BLINKY);
+    int dist_clyde = distancia_manhattan(pac_x,pac_y,clyde->getShape()->getX(),clyde->getShape()->getY());
+    int dist_inky = distancia_manhattan(pac_x,pac_y,inky->getShape()->getX(),inky->getShape()->getY());
+    int dist_blinky = distancia_manhattan(pac_x,pac_y,blinky->getShape()->getX(),blinky->getShape()->getY());
+    int dist_pinky = distancia_manhattan(pac_x,pac_y,pinky->getShape()->getX(),pinky->getShape()->getY());
+    cout << dist_blinky << " " << dist_clyde << " " << dist_inky << " " << dist_pinky << endl;
+    int ret = cant_puntos + 8/(0.5+dist_blinky) + 4/(0.5+dist_inky) + 4/(0.5+dist_pinky);
+    return ret;
 }
 
