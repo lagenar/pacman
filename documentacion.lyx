@@ -2038,7 +2038,7 @@ En la primera heurística, cuando quedaban pocos puntos, el costo asociado
  En esta heurística se aumenta el factor de la variable de los puntos para
  que en los estados finales este costo siga siendo el más preponderante.
  Esta modificación se hizo a riesgo de que se llegue a una solución en menos
- niveles.
+ casos.
 \end_layout
 
 \begin_layout Standard
@@ -2062,10 +2062,6 @@ guía
  y no interviene cuando está cerca.
  También, el costo correspondiente a los fantasmas debería reducir el comportami
 ento cíclico mencionado.
-\end_layout
-
-\begin_layout Standard
-
 \end_layout
 
 \begin_layout Subsubsection*

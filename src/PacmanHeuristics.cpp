@@ -3,12 +3,19 @@
 #include "Pacman.h"
 
 #include "iostream"
+#include "cmath"
 
 using namespace std;
+
 
 int distancia_manhattan(int x1, int x2, int y1, int y2)
 {
     return abs(x1-x2) + abs(y1-y2);
+}
+
+int distancia_euclidiana(int x1, int x2, int y1, int y2)
+{
+    return (int)sqrt(pow((x2-x1), 2) + pow((y2-y1), 2));
 }
 
 int distancia_punto_mas_cercano(const LogicObject * pacman, const GameSpace & gs)
@@ -32,7 +39,7 @@ int distancia_punto_mas_cercano(const LogicObject * pacman, const GameSpace & gs
         gs.getObjects(Rectangle(wi, hi, wf - wi, hf - hi), DOT, puntos);
         for (list<const LogicObject *>::const_iterator it = puntos.begin(); it != puntos.end(); it++) {
             const Shape * s = (*it)->getShape();
-            min_dist = min(min_dist, distancia_manhattan(x, s->getX(), y, s->getY()));
+            min_dist = min(min_dist, distancia_euclidiana(x, s->getX(), y, s->getY()));
         }
 
         hay_puntos = puntos.size() > 0;
@@ -112,29 +119,25 @@ unsigned int h3(const Game * game)
 
 unsigned int h4(const Game * game)
 {
-    set<string> ghostSubtype;
-    ghostSubtype.insert(GHOST);
-    list<const LogicObject *> ghosts;
-    game->getObjects(ghostSubtype, ghosts);
-    bool asustadizo =  game->getVariables().getBoolean(SCATTERED_MODE);
     const LogicObject * pacman = game->getObject(PACMAN);
-    list<const LogicObject *>::iterator it = ghosts.begin();
-    int min_dist = 1000;
-    const LogicObject * mas_cercano = NULL;
-    int x_pac = pacman->getShape()->getX();
-    int y_pac = pacman->getShape()->getY();
-    while (it != ghosts.end())
+    int pac_x = pacman->getShape()->getX();
+    int pac_y = pacman->getShape()->getY();
+    int cant_puntos = game->getVariables().getInteger(DOT_COUNT);
+
+    int costo_fantasmas = 0;
+    list<const LogicObject *> ghosts;
+    ghosts.push_back(game->getObject(CLYDE));
+    ghosts.push_back(game->getObject(INKY));
+    ghosts.push_back(game->getObject(PINKY));
+    ghosts.push_back(game->getObject(BLINKY));
+
+    for (list<const LogicObject *>::iterator it = ghosts.begin(); it != ghosts.end(); it++)
     {
-        int x = (*it)->getShape()->getX();
-        int y = (*it)->getShape()->getY();
-        if (distancia_manhattan(x_pac,y_pac,x,y) < min_dist)
-        {
-            min_dist = distancia_manhattan(x_pac, x, y_pac, y);
-            mas_cercano = (*it);
-        }
-        it++;
+        const Shape * s = (*it)->getShape();
+        costo_fantasmas += 10/distancia_euclidiana(s->getX(), pac_x, s->getY(), pac_y);
     }
-	return 2*game->getVariables().getInteger(DOT_COUNT) + !asustadizo * 10/(min_dist);
+
+    return  2*cant_puntos + costo_fantasmas;
 }
 
 unsigned int h5(const Game * game)
@@ -145,22 +148,6 @@ unsigned int h5(const Game * game)
 
 unsigned int h6(const Game * game)
 {
-    const LogicObject * pacman = game->getObject(PACMAN);
-    int pac_x = pacman->getShape()->getX();
-    int pac_y = pacman->getShape()->getY();
-    //bool asustadizo = game->getVariables().getBoolean(SCATTERED_MODE);
-	int cant_puntos = game->getVariables().getInteger(DOT_COUNT);
-    int dist_fantasmas = 0;
-    const LogicObject * clyde = game->getObject(CLYDE);
-    const LogicObject * inky = game->getObject(INKY);
-    const LogicObject * pinky = game->getObject(PINKY);
-    const LogicObject * blinky = game->getObject(BLINKY);
-    int dist_clyde = distancia_manhattan(pac_x,pac_y,clyde->getShape()->getX(),clyde->getShape()->getY());
-    int dist_inky = distancia_manhattan(pac_x,pac_y,inky->getShape()->getX(),inky->getShape()->getY());
-    int dist_blinky = distancia_manhattan(pac_x,pac_y,blinky->getShape()->getX(),blinky->getShape()->getY());
-    int dist_pinky = distancia_manhattan(pac_x,pac_y,pinky->getShape()->getX(),pinky->getShape()->getY());
-    cout << dist_blinky << " " << dist_clyde << " " << dist_inky << " " << dist_pinky << endl;
-    int ret = cant_puntos + 8/(0.5+dist_blinky) + 4/(0.5+dist_inky) + 4/(0.5+dist_pinky);
-    return ret;
+
 }
 
