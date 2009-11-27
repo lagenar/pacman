@@ -107,8 +107,6 @@ unsigned int h3(const Game * game)
     int cant_puntos = game->getVariables().getInteger(DOT_COUNT);
 	int dist_cercano = distancia_punto_mas_cercano(pacman, gs);
 
-    //if (cant_puntos <= dist_cercano)
-     //   return cant_puntos + cant_ghosts * frontera;
     return 5*cant_puntos + cant_ghosts * frontera + dist_cercano/10;
 }
 
@@ -136,7 +134,7 @@ unsigned int h4(const Game * game)
         }
         it++;
     }
-	return game->getVariables().getInteger(DOT_COUNT);
+	return 2*game->getVariables().getInteger(DOT_COUNT) + !asustadizo * 10/(min_dist+0.01);
 }
 
 unsigned int h5(const Game * game)
