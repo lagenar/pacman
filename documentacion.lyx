@@ -1202,7 +1202,7 @@ obliguen
 \begin_layout Standard
 Al no considerar a los fantasmas en el costo, puede que se necesiten niveles
  altos para que logre llegar a una solución.
- Esta omisión puede que tenga como consecuencia que los resultados no tengan
+ Esta omisión debería tener como consecuencia que los resultados no tengan
  la misma consistencia que en la heurística 1, ya que no se tienen elementos(a
  excepción de la exploración del algoritmo de búsqueda) que permitan detectar
  estados hostiles.
@@ -1210,6 +1210,15 @@ Al no considerar a los fantasmas en el costo, puede que se necesiten niveles
  para la supervivencia del pacman.
  Tampoco se saca ventaja del modo asustadizo.
  
+\end_layout
+
+\begin_layout Standard
+Una posible ventaja cuando se lo pruebe con niveles de exploración bajos
+ y se encuentre alejado de una zona de puntos, es que el costo asociado
+ a la distancia lo acercaría a la hacia la zona con puntos.
+ En cambio, si sólo se considerara la cantidad de puntos total, el pacman
+ no tendría forma acercarse(salvo que sea llevado por los fantasmas hacia
+ la zona).
 \end_layout
 
 \begin_layout Subsubsection*
@@ -1266,8 +1275,8 @@ return abs(x1-x2) + abs(y1-y2);
 
 \begin_layout Standard
 Para obtener la distancia al punto más cercano se implementó una función,
- distancia_punto_mas_cercano, que extrae rectángulos que tienen al pacman
- como centro hasta encontrar un punto en esa área.
+ distancia_punto_mas_cercano, que extrae rectángulos que contienen al pacman
+ como centro hasta encontrar un punto en ese área.
  El área del rectángulo a considerar se va duplicando en cada iteración.
  Está función invoca a la función distancia_manhattan para encontrar la
  menor distancia.
@@ -1458,7 +1467,7 @@ return min_dist;
 \end_layout
 
 \begin_layout Standard
-El codigo de la heurística 2 es:
+El código de la heurística 2 es:
 \end_layout
 
 \begin_layout LyX-Code
@@ -1575,7 +1584,7 @@ n sobre la posición de los fantasmas con respecto al pacman.
 En niveles de profundidad elevados, puede que el ajuste mediante la dependencia
  lineal cuando quedan pocos puntos favorezca al pacman, ya que al tener
  una extensión de búsqueda mayor y sólo considerar la cantidad de puntos,
- se puede encontrar una solución efectiva en el último tramo.
+ se puede encontrar una solución eficiente en el último tramo.
 \end_layout
 
 \begin_layout Standard
@@ -1909,12 +1918,13 @@ Viendo los resultados y el comportamiento obtuvimos las siguientes conclusiones:
 En el nivel de profundidad 10 el pacman es acorralado, esto concuerda con
  la hipótesis para niveles bajos.
  El factor de la distancia hizo que se acercara a puntos a los que no hubiese
- llegado sin considerar este factor.
+ llegado sin considerar este factor, aunque esto no fue muy evidente por
+ la muerte prematura.
 \end_layout
 
 \begin_layout Itemize
 Una situación imprevista en todos los niveles fue que en algunos lugares
- el pacman se queda parado(NoAction) o tiene un comportamiento ciclico(hace
+ el pacman se queda parado(NoAction) o tiene un comportamiento cíclico(hace
  un movimiento en una dirección y después otro en la dirección opuesta).
  Este comportamiento se debe a que el costo asociado a la distancia del
  punto más cercano luego de comer los puntos de una zona es mayor que el
@@ -1922,14 +1932,17 @@ Una situación imprevista en todos los niveles fue que en algunos lugares
  Debido a esto, cuando el pacman se encuentra en esas posiciones de equilibrio,
  sólo se mueve hacia los puntos cuando comienza a ser perseguido por los
  fantasmas.
+ Esto demuestra algunas falencias en la relación establecida entre las variables
+, se podría haber utilizado un factor de ajuste para corregir este comportamient
+o(posiblemente se modifique en otra heurística).
 \end_layout
 
 \begin_layout Itemize
-La relación de dependencia entre las variables establecida en la implementación
- funciona bien en los niveles altos, cuando se da que las distancias a los
- puntos más cercanos son mayores a la cantidad de puntos total, se comienza
- a considerar exclusivamente la cantidad de puntos lo que lleva a una solución
- rápida.
+En general, la relación de dependencia entre las variables establecida en
+ la implementación funciona bien en los niveles altos, cuando se da que
+ las distancias a los puntos más cercanos son mayores a la cantidad de puntos
+ total, se comienza a considerar exclusivamente la cantidad de puntos lo
+ que lleva a una solución rápida.
 \end_layout
 
 \begin_layout Itemize
@@ -2004,7 +2017,7 @@ Implementación
 \end_layout
 
 \begin_layout Subsubsection*
-Resultados empiricos e interpretación
+Resultados empíricos e interpretación
 \end_layout
 
 \end_body
