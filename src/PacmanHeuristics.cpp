@@ -129,12 +129,12 @@ unsigned int h4(const Game * game)
         int y = (*it)->getShape()->getY();
         if (distancia_manhattan(x_pac,y_pac,x,y) < min_dist)
         {
-            min_dist = distancia_manhattan(x_pac,y_pac,x,y);
+            min_dist = distancia_manhattan(x_pac, x, y_pac, y);
             mas_cercano = (*it);
         }
         it++;
     }
-	return 2*game->getVariables().getInteger(DOT_COUNT) + !asustadizo * 10/(min_dist+0.01);
+	return 2*game->getVariables().getInteger(DOT_COUNT) + !asustadizo * 10/(min_dist);
 }
 
 unsigned int h5(const Game * game)
