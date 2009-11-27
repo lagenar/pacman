@@ -83,8 +83,8 @@ unsigned int h2(const Game * game)
     const LogicObject * pacman = game->getObject(PACMAN);
     const GameSpace & gs = game->getGameSpace();
 
-	int cant_puntos = game->getVariables().getInteger(DOT_COUNT);
-	int dist_cercano = distancia_punto_mas_cercano(pacman, gs);
+    int cant_puntos = game->getVariables().getInteger(DOT_COUNT);
+    int dist_cercano = distancia_punto_mas_cercano(pacman, gs);
 
     if (cant_puntos <= dist_cercano)
         return cant_puntos;
@@ -112,7 +112,7 @@ unsigned int h3(const Game * game)
     gs.getObjects(Rectangle(wi,hi,wf-wi,hf-hi), LogicObject::Type(ghostSubtype), ghosts);
     int cant_ghosts = ghosts.size();
     int cant_puntos = game->getVariables().getInteger(DOT_COUNT);
-	int dist_cercano = distancia_punto_mas_cercano(pacman, gs);
+    int dist_cercano = distancia_punto_mas_cercano(pacman, gs);
 
     return 5*cant_puntos + cant_ghosts * frontera + dist_cercano/10;
 }
