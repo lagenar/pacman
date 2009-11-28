@@ -2068,6 +2068,179 @@ ento cíclico mencionado.
 Implementación
 \end_layout
 
+\begin_layout LyX-Code
+
+\size footnotesize
+unsigned int h3(const Game * game)
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+{     
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+
+\size footnotesize
+int frontera = 4;     
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+const GameSpace & gs = game->getGameSpace();     
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+int w = gs.getWidth();     
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+int h = gs.getHeight();     
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+const LogicObject * pacman = game->getObject(PACMAN);     
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+const Shape * shape = pacman->getShape();     
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+int x = shape->getX();     
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+int y = shape->getY();     
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+int hi, hf, wi, wf; //Extremos del rectangulo.
+     
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+hi = max(0, y - frontera);     
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+hf = min(h - 1, y + frontera);     
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+wi = max(0, x - frontera);     
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+wf = min(w - 1, x + frontera);     
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+set<string> ghostSubtype;     
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+ghostSubtype.insert(GHOST);     
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+list<const LogicObject *> ghosts;     
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+gs.getObjects(Rectangle(wi,hi,wf-wi,hf-hi), 
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+              LogicObject::Type(ghostSubtype), ghosts);     
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+int cant_ghosts = ghosts.size();     
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+int cant_puntos = game->getVariables().getInteger(DOT_COUNT);    
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+int dist_cercano = distancia_punto_mas_cercano(pacman, gs);
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+return 5*cant_puntos + cant_ghosts * frontera + dist_cercano/10; 
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+
+\size footnotesize
+}
+\end_layout
+
+\begin_layout Standard
+Se observa  que el código de esta heurística es una combinación de las primeras
+ dos.
+ Como se menciono anteriormente, se eligió el factor de la cantidad de puntos
+ para que tenga mayor importancia que en casi todos los estados del juego(más
+ que nada para cuando queden pocos puntos).
+ Para que la distancia al más cercano sólo tenga incidencia a distancias
+ significativas se divide el resultado por 10(si la distancia es menor que
+ 10 ese término es cero).
+ 
+\end_layout
+
+\begin_layout Standard
+Al igual que en la primera heurística el término que contiene a la cantidad
+ de fantasmas puede interpretarse como la cantidad de pasos para alejarse
+ de esa zona, y además, cuantos más fantasmas hay en la zona mayor es el
+ peligro.
+ 
+\end_layout
+
 \begin_layout Subsubsection*
 Resultados empíricos e interpretación
 \end_layout
