@@ -2656,5 +2656,32 @@ Precisión de la heurística 3
 
 \end_layout
 
+\begin_layout Subsection
+Heurística 4
+\end_layout
+
+\begin_layout Subsubsection*
+Idea e hipótesis
+\end_layout
+
+\begin_layout Standard
+La cuarta heurística usa técnicas usadas en las heurísticas anteriores,
+ con cambios significativos en los factores de las variables y en la forma
+ de medir distancias.
+ Además, se cambia la forma en que el pacman recorre el mapa.
+\end_layout
+
+\begin_layout Standard
+En esta heurística se divide el espacio en dos zonas del mismo tamaño
+\end_layout
+
+\begin_layout Subsubsection*
+Implementación
+\end_layout
+
+\begin_layout Subsubsection*
+Resultados e interpretación
+\end_layout
+
 \end_body
 \end_document

@@ -119,6 +119,7 @@ unsigned int h3(const Game * game)
 
 unsigned int h4(const Game * game)
 {
+    const GameSpace & gs = game->getGameSpace();
     const LogicObject * pacman = game->getObject(PACMAN);
     int pac_x = pacman->getShape()->getX();
     int pac_y = pacman->getShape()->getY();
@@ -137,7 +138,12 @@ unsigned int h4(const Game * game)
         costo_fantasmas += 10/distancia_euclidiana(s->getX(), pac_x, s->getY(), pac_y);
     }
 
-    return  2*cant_puntos + costo_fantasmas;
+    list<const LogicObject *> puntos;
+    gs.getObjects(Rectangle(0, 15, 28, 31), DOT, puntos);
+    int puntos_abajo = puntos.size();
+    int puntos_arriba = cant_puntos - puntos_abajo;
+
+    return  122*puntos_abajo + puntos_arriba + costo_fantasmas;
 }
 
 unsigned int h5(const Game * game)
