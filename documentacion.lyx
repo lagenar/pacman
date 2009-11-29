@@ -2668,19 +2668,752 @@ Idea e hipótesis
 La cuarta heurística usa técnicas usadas en las heurísticas anteriores,
  con cambios significativos en los factores de las variables y en la forma
  de medir distancias.
- Además, se cambia la forma en que el pacman recorre el mapa.
+ Además, se cambia la forma en que el pacman recorre el espacio de juego.
 \end_layout
 
 \begin_layout Standard
-En esta heurística se divide el espacio en dos zonas del mismo tamaño
+En esta heurística se divide el espacio en dos zonas del mismo tamaño, la
+ zona superior y la zona inferior.
+ La idea es que si se comen primeros los puntos de una zona y luego se pasa
+ a la otra se evitará en mayor medida recorrer muchas veces caminos largos
+ sin puntos.
+ Para hacer que el pacman coma los puntos de una zona antes que en la otra,
+ los puntos restantes se consideran en dos variables, una para la zona inferior
+ y otra para la superior.
+ Los puntos de la zona con más prioridad(en este caso se tomó la inferior
+ porque es en donde comienza el juego) tendrán un factor mayor.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset space \qquad{}
+\end_inset
+
+
+\begin_inset space \qquad{}
+\end_inset
+
+
+\begin_inset space \qquad{}
+\end_inset
+
+
+\begin_inset space \qquad{}
+\end_inset
+
+
+\begin_inset Graphics
+	filename zonas-heur-4.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+División del mapa en zonas
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+El otro costo asociado en la heurística es la distancia a todos los fantasmas.
+ A diferencia de la primera heurística, en la cual se consideraba la cantidad
+ de fantasmas dentro de una frontera, se tiene en cuenta la distancia en
+ forma más precisa.
+ También se aplica un factor a la distancia de cada fantasma para que sea
+ inversamente proporcional al costo asociado.
+ En cuanto a los cambios de medición de distancias se cambió la distancia
+ de Manhattan por la euclideana.
+ A diferencia de la distancia de Manhattan, la distancia euclideana da una
+ cota inferior de la cantidad de pasos comprendidos entre dos puntos.
+ La prueba experimental con estas distancias llevó a elegir a la distancia
+ euclideana para esta heurística(en contraposición a lo planteado para las
+ heurísticas 2 y 3).
+ Como esta distancia es una cota inferior de la distancia real, su elección
+ tiene la consecuencia de que el costo asociado a los fantasmas sea mayor
+ que si se toma la de Manhattan.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset space \qquad{}
+\end_inset
+
+
+\begin_inset space \qquad{}
+\end_inset
+
+
+\begin_inset space \qquad{}
+\end_inset
+
+
+\begin_inset space \qquad{}
+\end_inset
+
+
+\begin_inset Graphics
+	filename man y euc.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Distancias de Manhattan(rojo) y euclideana(verde) desde el pacman a un fantasma.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsubsection*
 Implementación
 \end_layout
 
+\begin_layout Standard
+Se define la distancia euclideana:
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+int distancia_euclidiana(int x1, int x2, int y1, int y2) 
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+{     
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+
+\size footnotesize
+return (int)sqrt(pow((x2-x1), 2) + pow((y2-y1), 2)); 
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+
+\size footnotesize
+}
+\end_layout
+
+\begin_layout Standard
+Y la función heurística 4:
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+unsigned int h4(const Game * game) 
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+{     
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+
+\size footnotesize
+const GameSpace & gs = game->getGameSpace();     
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+const LogicObject * pacman = game->getObject(PACMAN);     
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+int pac_x = pacman->getShape()->getX();     
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+int pac_y = pacman->getShape()->getY();     
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+int cant_puntos = game->getVariables().getInteger(DOT_COUNT);
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+int costo_fantasmas = 0;     
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+list<const LogicObject *> ghosts;     
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+
+\size footnotesize
+ghosts.push_back(game->getObject(CLYDE));     
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+ghosts.push_back(game->getObject(INKY));     
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+ghosts.push_back(game->getObject(PINKY));     
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+ghosts.push_back(game->getObject(BLINKY));
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+list<const LogicObject *>::iterator it;
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+for (it = ghosts.begin(); it != ghosts.end(); it++)     
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+{         
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+
+\size footnotesize
+const Shape * s = (*it)->getShape();         
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+costo_fantasmas += 10/distancia_euclidiana(s->getX(), pac_x, s->getY(),
+ pac_y);
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+
+\size footnotesize
+}
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+list<const LogicObject *> puntos;     
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+gs.getObjects(Rectangle(0, 15, 28, 31), DOT, puntos);     
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+int puntos_abajo = puntos.size();     
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+int puntos_arriba = cant_puntos - puntos_abajo;
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+return 10*puntos_abajo + puntos_arriba + costo_fantasmas; 
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+
+\size footnotesize
+}
+\end_layout
+
+\begin_layout Standard
+El costo de la cantidad de puntos se calcula en forma separada teniendo
+ en cuenta los puntos de cada zona, el factor de los puntos de la zona inferior
+ es mayor que el de los de la zona superior por lo mencionado en la hipótesis.
+\end_layout
+
+\begin_layout Standard
+En las iteraciones del ciclo for se calcula el costo que asociado a la posición
+ de los fantasmas.
+ Como la distancia es inversamente proporcional al costo, se encuentra dividiend
+o en el cálculo.
+ El factor(10) al que se divide puede pensarse como la máxima distancia
+ en la que tendrá incidencia un fantasma.
+ 
+\end_layout
+
+\begin_layout Standard
+Como la cantidad de puntos de cada zona se obtiene pidiendo el rectángulo
+ que la comprende, la complejidad de la función es de 
+\begin_inset Formula $O\left(w*h\right)$
+\end_inset
+
+, donde 
+\begin_inset Formula $w$
+\end_inset
+
+ y 
+\begin_inset Formula $h$
+\end_inset
+
+ son el ancho y el largo del mapa respectivamente.
+\end_layout
+
 \begin_layout Subsubsection*
 Resultados e interpretación
+\end_layout
+
+\begin_layout Standard
+La función se probó en dos niveles de profundidad bajos (8 y 10) y dos altos(20
+ y 30).
+ Además de la comparación de los resultados con las heurísticas anteriores,
+ en los niveles bajos se observa el comportamiento considerando que tan
+ efectivo es el costo asociado a los fantasmas(en niveles altos este costo
+ no es tan importante para la supervivencia) y que incidencia tiene la división
+ del costo de los puntos en zonas tanto en los niveles bajos como en los
+ altos.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="5">
+<features>
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Nivel
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Resultado
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Pasos
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Puntos restantes
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Estados evaluados
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Perdió
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+652
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+20
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+16204
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Ganó
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+358
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+14434
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+20
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Ganó
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+405
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+70050
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+30
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Ganó
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+449
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+254101
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Resultados de la heurística 4.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Observaciones sobre los resultados y comportamiento:
+\end_layout
+
+\begin_layout Itemize
+En los niveles bajos el pacman llega a comer una buena cantidad de puntos(en
+ 10 ganó), en el nivel 8 el pacman termina acorralado en una esquina.
+ Las esquinas del mapa son puntos peligrosos porque si dos fantasmas se
+ dirigen a cada salida, en niveles de profundidad bajos y cuando hay puntos
+ en la esquina no se prevé esta situación y termina perdiendo.
+ Quizás, otra heurística podría aumentar el costo cuando se pasa por las
+ esquinas.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename casi-acorr.png
+	scale 40
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename acorr.png
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Pacman acorralado en una esquina.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+En el nivel de profundidad 10 se obtuvo la mejor solución(hasta el momento)
+ de todas las heurísticas.
+ La principal razón de este resultado es que el pacman comió los puntos
+ de la zona inferior, y luego las de la zona superior, sin volver abajo.
+ En este caso se dejaron menos puntos aislados que en las heurísticas anteriores
+, haciendo que al final se tengan que recorrer longitudes más cortas para
+ comer la totalidad de los puntos.
+ Que en el nivel 10 se haya conseguido una buena solución, no significa
+ que la heurística pueda conseguir soluciones iguales o mejores en niveles
+ cercanos al 10(como se vio en el caso del nivel 8).
+ Esto en parte ocurre porque no se tienen en cuenta la distancia a los puntos
+ a (diferencia de las heurísticas 2 y 3), combinado con la posibilidad de
+ que el costo de los fantasmas lleve al pacman a una zona donde no hay puntos.
+\end_layout
+
+\begin_layout Itemize
+En los niveles de profundidad más altos vuelve a surgir el problema de los
+ puntos aislados, aunque en este caso se produce localmente en cada zona.
+ Este comportamiento era de esperarse, porque al tener mayor visión el pacman
+ puede verse comiendo en una zona con una densidad de puntos mayor a la
+ de la zona en la que se encuentra antes de la exploración que realiza el
+ método 
+\emph on
+minimin
+\emph default
+.
+ Si bien surgió este problema, no es tan marcado como en las otras heurísticas,
+ por esto se observa una mejora en la cantidad final de pasos para los niveles
+ 20 y 30.
+ Una forma de reducir aún más los puntos aislados sería dividir el mapa
+ en más zonas.
 \end_layout
 
 \end_body

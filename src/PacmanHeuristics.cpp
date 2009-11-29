@@ -143,7 +143,7 @@ unsigned int h4(const Game * game)
     int puntos_abajo = puntos.size();
     int puntos_arriba = cant_puntos - puntos_abajo;
 
-    return  122*puntos_abajo + puntos_arriba + costo_fantasmas;
+    return  10*puntos_abajo + puntos_arriba + costo_fantasmas;
 }
 
 unsigned int h5(const Game * game)
