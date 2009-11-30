@@ -148,12 +148,50 @@ unsigned int h4(const Game * game)
 
 unsigned int h5(const Game * game)
 {
-    // Reemplazar
-	return game->getVariables().getInteger(DOT_COUNT);
+    const LogicObject * pacman = game->getObject(PACMAN);
+    const GameSpace & gs = game->getGameSpace();
+    int cant_puntos = game->getVariables().getInteger(DOT_COUNT);
+    int pac_x, pac_y;
+    pac_x = pacman->getShape()->getX();
+    pac_y = pacman->getShape()->getY();
+    int hi, hf, wi, wf;
+    if (pac_x <= 14)
+    {
+        wi = 1;
+        wf = 14;
+        if(pac_y <= 15)
+        {
+            hi = 1;
+            hf = 15;
+        }
+        else
+        {
+            hi = 15;
+            hf = 31;
+        }
+    }
+    else
+    {
+        wi = 14;
+        wf = 28;
+        if(pac_y <= 15)
+        {
+            hi = 1;
+            hf = 15;
+        }
+        else
+        {
+            hi = 15;
+            hf = 31;
+        }
+    }
+    list<const LogicObject *> puntos;
+    gs.getObjects(Rectangle(wi,hi,wf,hf), DOT, puntos);
+    int cant_puntos_zona = puntos.size();
+    return 2*cant_puntos + cant_puntos_zona/5;
 }
 
 unsigned int h6(const Game * game)
 {
-
 }
 
