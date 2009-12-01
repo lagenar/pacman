@@ -220,10 +220,11 @@ unsigned int h6(const Game * game)
     int puntos_abajo = puntos.size();
     int puntos_arriba = cant_puntos - puntos_abajo;
     int dist_cercano = distancia_punto_mas_cercano(pacman, gs);
+    int dist_centro = abs(pac_x-w/2) + abs(pac_y-h/2);
 
     if (modo_asust)
-        return  10*puntos_abajo + puntos_arriba + costo_fantasmas + dist_cercano/10 + (abs(pac_x-w/2) + abs(pac_y-h/2))/7;
+        return  10*puntos_abajo + puntos_arriba + costo_fantasmas + dist_cercano/10 + dist_centro/7;
 
-    return 3*puntos_abajo + puntos_arriba + costo_fantasmas +  dist_cercano/10 + (abs(pac_x-w/2) + abs(pac_y-h/2))/2;
+    return 3*puntos_abajo + puntos_arriba + costo_fantasmas +  dist_cercano/10 + dist_centro/2;
 }
 
