@@ -193,5 +193,37 @@ unsigned int h5(const Game * game)
 
 unsigned int h6(const Game * game)
 {
+    const GameSpace & gs = game->getGameSpace();
+    int h = gs.getHeight();
+    int w = gs.getWidth();
+    const LogicObject * pacman = game->getObject(PACMAN);
+    int pac_x = pacman->getShape()->getX();
+    int pac_y = pacman->getShape()->getY();
+    int cant_puntos = game->getVariables().getInteger(DOT_COUNT);
+
+    int costo_fantasmas = 0;
+    list<const LogicObject *> ghosts;
+    ghosts.push_back(game->getObject(CLYDE));
+    ghosts.push_back(game->getObject(INKY));
+    ghosts.push_back(game->getObject(PINKY));
+    ghosts.push_back(game->getObject(BLINKY));
+    bool modo_asust = game->getVariables().getBoolean(SCATTERED_MODE);
+    if (!modo_asust)
+        for (list<const LogicObject *>::iterator it = ghosts.begin(); it != ghosts.end(); it++)
+        {
+            const Shape * s = (*it)->getShape();
+            costo_fantasmas += 15/distancia_euclidiana(s->getX(), pac_x, s->getY(), pac_y);
+        }
+
+    list<const LogicObject *> puntos;
+    gs.getObjects(Rectangle(0, 15, 28, 31), DOT, puntos);
+    int puntos_abajo = puntos.size();
+    int puntos_arriba = cant_puntos - puntos_abajo;
+    int dist_cercano = distancia_punto_mas_cercano(pacman, gs);
+
+    if (modo_asust)
+        return  10*puntos_abajo + puntos_arriba + costo_fantasmas + dist_cercano/10 + (abs(pac_x-w/2) + abs(pac_y-h/2))/7;
+
+    return 10*puntos_abajo + puntos_arriba + costo_fantasmas +  dist_cercano/10 + (abs(pac_x-w/2) + abs(pac_y-h/2))/2;
 }
 
