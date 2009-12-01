@@ -193,5 +193,6 @@ unsigned int h5(const Game * game)
 
 unsigned int h6(const Game * game)
 {
+    return game->getVariables().getInteger(DOT_COUNT);
 }
 

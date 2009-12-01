@@ -2647,10 +2647,6 @@ Precisión de la heurística 3
 
 \end_layout
 
-\begin_layout Plain Layout
-
-\end_layout
-
 \end_inset
 
 
@@ -3032,7 +3028,7 @@ Como la cantidad de puntos de cada zona se obtiene pidiendo el rectángulo
 \end_layout
 
 \begin_layout Subsubsection*
-Resultados e interpretación
+Resultados empíricos e interpretación
 \end_layout
 
 \begin_layout Standard
@@ -3414,6 +3410,842 @@ minimin
  20 y 30.
  Una forma de reducir aún más los puntos aislados sería dividir el mapa
  en más zonas.
+\end_layout
+
+\begin_layout Subsection
+Heurística 5
+\end_layout
+
+\begin_layout Subsubsection*
+Idea e hipótesis
+\end_layout
+
+\begin_layout Standard
+Esta heurística considera al espacio de juego dividido en 4 esquinas.
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename esquinas.png
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+División en esquinas
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La idea detrás de esta división es minimizar la cantidad de puntos que se
+ dejan en una zona antes de pasar a la siguiente.
+\end_layout
+
+\begin_layout Standard
+Las variables que se tienen en cuenta son la cantidad de puntos restantes
+ en la totalidad del juego y en la zona correspondiente a la ubicación del
+ pacman.
+\end_layout
+
+\begin_layout Standard
+El resultado esperado al considerar la cantidad de puntos por zona es minimizar
+ la cantidad de puntos aislados hacia el final del juego y en consecuencia
+ el número de pasos requeridos para hallar la solución.
+\end_layout
+
+\begin_layout Standard
+La cantidad de puntos restantes en la totalidad del juego tendrán más importanci
+a debido a que no siempre será posible consumir todos los puntos de una
+ zona antes de pasar a la siguiente.
+\end_layout
+
+\begin_layout Subsubsection*
+Implementación
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+unsigned int h5(const Game * game)
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+{
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+
+\size footnotesize
+const LogicObject * pacman = game->getObject(PACMAN);
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+const GameSpace & gs = game->getGameSpace();
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+int cant_puntos = game->getVariables().getInteger(DOT_COUNT);
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+int pac_x, pac_y;
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+pac_x = pacman->getShape()->getX();
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+pac_y = pacman->getShape()->getY();
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+int hi, hf, wi, wf;
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+if (pac_x <= 14)
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+{
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+
+\size footnotesize
+wi = 1;
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+wf = 14;
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+if(pac_y <= 15)
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+{
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+
+\size footnotesize
+hi = 1;
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+hf = 15; 
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+
+\size footnotesize
+}   
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+else 
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+{ 
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+
+\size footnotesize
+hi = 15;
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+hf = 31;
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+
+\size footnotesize
+}     
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+
+\size footnotesize
+}
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+else
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+{
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+
+\size footnotesize
+wi = 14;
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+wf = 28;
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+if(pac_y <= 15)
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+{
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+
+\size footnotesize
+hi = 1;
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+hf = 15;
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+
+\size footnotesize
+}
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+else
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+{ 
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+
+\size footnotesize
+hi = 15;
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+hf = 31;
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+
+\size footnotesize
+}
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+
+\size footnotesize
+}
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+list<const LogicObject *> puntos;
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+gs.getObjects(Rectangle(wi,hi,wf,hf), DOT, puntos);
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+int cant_puntos_zona = puntos.size();
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+return 2*cant_puntos + cant_puntos_zona/5;
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+
+\size footnotesize
+} 
+\end_layout
+
+\begin_layout Standard
+Como es posible observar, la implementación es muy sencilla y la operación
+ más costosa es la de obtener los puntos de la zona requerida.
+\end_layout
+
+\begin_layout Standard
+Uno de los factores empleados para ajustar la ecuación es el factor(2) que
+ multiplica a la cantidad de puntos que quedan por consumir para ganar el
+ juego.
+ La necesidad de este factor de ajuste surge a partir de, como fue mencionado
+ anteriormente, priorizar el consumo de puntos ya que en algunas ocasiones
+ no es posible consumir todos los puntos de una zona antes de pasar a otra
+ y también de evitar que el pacman se quede dando vueltas en una misma esquina
+ evitando pasar a la siguiente.
+\end_layout
+
+\begin_layout Standard
+El otro factor empleado es el factor(1/5) que multiplica a la cantidad de
+ puntos restantes en la zona, este factor puede interpretarse como que es
+ aceptable que queden 5 puntos en una zona antes de moverse a la siguiente.
+\end_layout
+
+\begin_layout Subsubsection*
+Resultados empíricos e interpretación
+\end_layout
+
+\begin_layout Standard
+La función de evaluación heurística se probó en diferentes niveles de profundida
+d (10, 18, 20, 30 y 35) y se comparó con las anteriores.
+\end_layout
+
+\begin_layout Standard
+El primer punto interesante de comparación surge a partir de la comparación
+ de la cantidad de niveles necesarios para llegar a ganar el juego.
+ Al no considerar en ninguna medida a los fantasmas es previsible que se
+ requiera una mayor cantidad de niveles.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="6" columns="5">
+<features>
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Nivel
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Resultado
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Pasos
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Puntos restantes
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Estados Evaluados
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Perdió
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+90
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+176
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2764
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+18
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Ganó
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+811
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+81541
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+20
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Ganó
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+440
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+69312
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+30
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Ganó
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+462
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+240121
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+35
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Ganó
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+420
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+373377
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Resultados de la heurística 5
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A partir del análisis de los resultados obtenidos se pueden remarcar los
+ siguientes puntos:
+\end_layout
+
+\begin_layout Itemize
+En niveles bajos, al no considerar a los fantasmas, el pacman queda atrapado
+ y pierde el juego.
+\end_layout
+
+\begin_layout Itemize
+Los cambios de zonas se producen cuando el pacman es perseguido por los
+ fantasmas y obligado a desplazarse fuera de la esquina en la que se encontraba.
+ Estos cambios se dan incluso aunque el pacman no haya terminado de consumir
+ los puntos de la zona.
+\end_layout
+
+\begin_layout Itemize
+Al cambiar de zona, debido a las características de la heurística, cambia
+ el objetivo del pacman y no vuelve por los puntos que dejó atrás hasta
+ regresar a la esquina anterior.
+\end_layout
+
+\begin_layout Itemize
+En el nivel 18 surge algo interesante, cuando el pacman consume los puntos
+ de las dos esquinas inferiores, debido a la baja profundidad, no puede
+ ver que quedan puntos por consumir en las dos zonas superiores y sólo los
+ alcanza cuando es perseguido por los fantasmas y se ve obligado a ir hacia
+ arriba.
+ Así se explica el alto número de acciones requeridas para completar el
+ juego.
+\end_layout
+
+\begin_layout Itemize
+En la figura 11 se puede ver que en general los valores devueltos se encuentran
+ por debajo del costo real.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Heuristica5-30.gif
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Precisión de la heurística 5
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename dando vueltas.png
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+El pacman se queda dando vueltas por las dos esquinas inferiores
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename cambio de zona.png
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+El pacman es obligado a cambiar de zona por los fantasmas
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_body
