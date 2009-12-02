@@ -224,6 +224,7 @@ sideways false
 status open
 
 \begin_layout Plain Layout
+\align center
 \begin_inset Graphics
 	filename Heuristica-ejemplo.gif
 	scale 40
@@ -537,8 +538,10 @@ sideways false
 status open
 
 \begin_layout Plain Layout
+\align center
 \begin_inset Graphics
 	filename frontera.png
+	scale 40
 
 \end_inset
 
@@ -1080,6 +1083,7 @@ sideways false
 status open
 
 \begin_layout Plain Layout
+\align center
 \begin_inset Graphics
 	filename Heuristica1-30.gif
 	scale 40
@@ -1889,6 +1893,7 @@ sideways false
 status open
 
 \begin_layout Plain Layout
+\align center
 \begin_inset Graphics
 	filename Heuristica2-35.gif
 	scale 40
@@ -1966,21 +1971,10 @@ Como se observa en el gráfico de la figura 4 se mejoró la precisión de la
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
-\begin_inset space \qquad{}
-\end_inset
-
-
-\begin_inset space \qquad{}
-\end_inset
-
-
-\begin_inset space \qquad{}
-\end_inset
-
-
+\align center
 \begin_inset Graphics
 	filename varado.png
 	scale 40
@@ -2635,6 +2629,7 @@ sideways false
 status open
 
 \begin_layout Plain Layout
+\align center
 \begin_inset Graphics
 	filename Heuristica3-30.gif
 	scale 40
@@ -2696,24 +2691,10 @@ sideways false
 status open
 
 \begin_layout Plain Layout
-\begin_inset space \qquad{}
-\end_inset
-
-
-\begin_inset space \qquad{}
-\end_inset
-
-
-\begin_inset space \qquad{}
-\end_inset
-
-
-\begin_inset space \qquad{}
-\end_inset
-
-
+\align center
 \begin_inset Graphics
 	filename zonas-heur-4.png
+	scale 40
 
 \end_inset
 
@@ -2763,24 +2744,10 @@ sideways false
 status open
 
 \begin_layout Plain Layout
-\begin_inset space \qquad{}
-\end_inset
-
-
-\begin_inset space \qquad{}
-\end_inset
-
-
-\begin_inset space \qquad{}
-\end_inset
-
-
-\begin_inset space \qquad{}
-\end_inset
-
-
+\align center
 \begin_inset Graphics
 	filename man y euc.png
+	scale 40
 
 \end_inset
 
@@ -3350,6 +3317,7 @@ sideways false
 status open
 
 \begin_layout Plain Layout
+\align center
 \begin_inset Graphics
 	filename casi-acorr.png
 	scale 40
@@ -3437,8 +3405,10 @@ sideways false
 status open
 
 \begin_layout Plain Layout
+\align center
 \begin_inset Graphics
 	filename esquinas.png
+	scale 40
 
 \end_inset
 
@@ -4172,6 +4142,7 @@ sideways false
 status open
 
 \begin_layout Plain Layout
+\align center
 \begin_inset Graphics
 	filename Heuristica5-30.gif
 	scale 40
@@ -4202,20 +4173,10 @@ sideways false
 status open
 
 \begin_layout Plain Layout
-\begin_inset space \qquad{}
-\end_inset
-
-
-\begin_inset space \qquad{}
-\end_inset
-
-
-\begin_inset space \qquad{}
-\end_inset
-
-
+\align center
 \begin_inset Graphics
 	filename cambio de zona.png
+	scale 40
 
 \end_inset
 
@@ -4940,18 +4901,7 @@ sideways false
 status open
 
 \begin_layout Plain Layout
-\begin_inset space \qquad{}
-\end_inset
-
-
-\begin_inset space \qquad{}
-\end_inset
-
-
-\begin_inset space \qquad{}
-\end_inset
-
-
+\align center
 \begin_inset Graphics
 	filename ultimos-puntos.png
 	scale 40
@@ -4959,9 +4909,6 @@ status open
 \end_inset
 
 
-\end_layout
-
-\begin_layout Plain Layout
 \begin_inset Caption
 
 \begin_layout Plain Layout
@@ -5018,18 +4965,7 @@ sideways false
 status open
 
 \begin_layout Plain Layout
-\begin_inset space \qquad{}
-\end_inset
-
-
-\begin_inset space \qquad{}
-\end_inset
-
-
-\begin_inset space \qquad{}
-\end_inset
-
-
+\align center
 \begin_inset Graphics
 	filename perdio-20.png
 	scale 40
@@ -5063,6 +4999,7 @@ sideways false
 status open
 
 \begin_layout Plain Layout
+\align center
 \begin_inset Graphics
 	filename Heuristica6-6.gif
 	scale 40
