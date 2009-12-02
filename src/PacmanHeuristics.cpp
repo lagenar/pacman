@@ -15,7 +15,7 @@ int distancia_manhattan(int x1, int x2, int y1, int y2)
 
 int distancia_euclidiana(int x1, int x2, int y1, int y2)
 {
-    return (int)sqrt(pow((x2-x1), 2) + pow((y2-y1), 2));
+    return (int)sqrt(pow((double)(x2-x1), 2) + pow((double)(y2-y1), 2));
 }
 
 int distancia_punto_mas_cercano(const LogicObject * pacman, const GameSpace & gs)
